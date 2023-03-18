@@ -1,0 +1,21 @@
+.menu {
+    position: fixed;
+    left: 0;
+    transform: translate3d(-200vw, 0, 0);
+    height: 100%;/*calc(100% - 4.9em);*/
+    width: min-content;
+    z-index: 5;
+    transition-duration: .5s;
+    transition-timing-function: ease;
+}
+
+.menuGlassCard {
+    color: red;
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgb(201, 195, 231, .5);
+    backdrop-filter: blur(8px);
+    width: 100%;
+    padding: 1.5em;
+    box-sizing: border-box;
+    transform: translate3d(0vw, 0, 0);
+}

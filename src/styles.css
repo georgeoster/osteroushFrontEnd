@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: url(./assets/osteroushBackground.jpg) fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    --font-color: #e8eaf5;
+}

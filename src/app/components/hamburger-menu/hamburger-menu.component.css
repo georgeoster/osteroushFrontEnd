@@ -1,0 +1,29 @@
+.hamburger, .hamburgerClosed {
+    width: 2em;    
+}
+
+.hamburger:before,
+.hamburger:after,
+.hamburger div,
+.hamburgerClosed:before,
+.hamburgerClosed:after,
+.hamburgerClosed div {
+    background: var(--font-color);
+    content: "";
+    display: block;
+    height: 2px;
+    border-radius: 3px;
+    margin: 7px 0;
+    transition: .5s;
+}
+
+.hamburger:before {
+    transform: translateY(9px) rotate(135deg);
+}
+
+.hamburger:after {
+    transform: translateY(-9px) rotate(-135deg);
+}
+.hamburger div {
+    transform: scale(0);
+}
