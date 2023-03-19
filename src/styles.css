@@ -13,4 +13,7 @@ html, body {
     background-position: center;
 
     --font-color: #e8eaf5;
+    --primary-purple: #632f56;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
