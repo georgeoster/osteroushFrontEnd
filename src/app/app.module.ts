@@ -10,6 +10,7 @@ import { HamburgerMenuComponent } from './components/hamburger-menu/hamburger-me
 import { MenuComponent } from './components/menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule} from '@angular/material/icon';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MatIconModule} from '@angular/material/icon';
     AddPlaceComponent,
     HeaderComponent,
     HamburgerMenuComponent,
-    MenuComponent
+    MenuComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

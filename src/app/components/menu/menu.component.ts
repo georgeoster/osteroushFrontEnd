@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { MenuService } from 'src/app/services/menu.service';
 export class MenuComponent {
 
   showMenu:boolean = false;
-  menuItems:Array<{icon:string,label:string, handler: any}> = [];
+  menuItems:Array<{icon:string, label:string, handler: any}> = [];
 
-  constructor(private menuService:MenuService){
+  constructor(private menuService:MenuService, private router: Router){
     this.subscribeToMenuService();
     this.subscribeToSignedInService();
   }
@@ -24,6 +25,7 @@ export class MenuComponent {
 
   homeHandler() {
     console.log('homeHandler called');
+    this.router.navigate(['home']);
   }
 
   viewHandler() {
@@ -32,6 +34,7 @@ export class MenuComponent {
 
   addHandler() {
     console.log('addHandler called');
+    this.router.navigate(['addPlace']);
   }
 
   signInHandler() {
