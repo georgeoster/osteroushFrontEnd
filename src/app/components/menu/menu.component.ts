@@ -23,9 +23,14 @@ export class MenuComponent {
     });
   }
 
+  closeMenu(){
+    this.menuService.closeMenu();
+  }
+
   homeHandler() {
     console.log('homeHandler called');
     this.router.navigate(['home']);
+    this.closeMenu();
   }
 
   viewHandler() {
@@ -35,6 +40,7 @@ export class MenuComponent {
   addHandler() {
     console.log('addHandler called');
     this.router.navigate(['addPlace']);
+    this.closeMenu();
   }
 
   signInHandler() {
@@ -45,10 +51,10 @@ export class MenuComponent {
   subscribeToSignedInService(){
     //TODO create signedinservice.
     this.menuItems = [
-      {icon: 'home', label: 'HOME', handler: this.homeHandler.bind(this)},
-      {icon: 'visibility', label: 'VIEW PLACES', handler: this.viewHandler.bind(this)},
-      {icon: 'restaurant', label: 'ADD PLACE', handler: this.addHandler.bind(this)},
-      {icon: 'person', label: 'SIGN IN', handler: this.signInHandler.bind(this)}
+      {icon: 'home', label: 'Home', handler: this.homeHandler.bind(this)},
+      {icon: 'visibility', label: 'View Places', handler: this.viewHandler.bind(this)},
+      {icon: 'restaurant', label: 'Add Place', handler: this.addHandler.bind(this)},
+      {icon: 'person', label: 'Sign In', handler: this.signInHandler.bind(this)}
     ]
   }
 

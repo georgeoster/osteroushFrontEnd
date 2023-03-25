@@ -12,6 +12,14 @@
     flex-direction: column;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+    flex-grow: 1;
+    overflow: auto;
+}
+
 @keyframes gradient {
     0% {
         background-position: 0% 50%;
