@@ -24,7 +24,7 @@ export class AddPlaceComponent {
    }
 
   name:string='';
-  date = new Date();
+  date = new Date('');
   comments:string='';
   imagesToUpload:File[]=[];
 
