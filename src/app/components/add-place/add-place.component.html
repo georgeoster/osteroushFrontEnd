@@ -1,17 +1,35 @@
-<!-- <div class="flexColumn">
-    <input type="text" [(ngModel)]="name" placeholder="Name">
-    <input type="date" [(ngModel)]="date">
-    <input type="text" [(ngModel)]="comments" placeholder="Comments">
-    <input type="file" multiple (change)="imageUploadHandler($event)">
-    <button (click)="saveButtonHandler()">Save</button>
-    <button (click)="updateButtonHandler()">Update</button>
-    <button (click)="deleteButtonHandler()">Delete</button>
-</div>
+<main class="glassCard flexColumn">
+    <header>Add Place</header>
+    <section>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="name">
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Comments</mat-label>
+            <input matInput [(ngModel)]="comments">
+        </mat-form-field>
 
-<!-- <img src="https://osteroushimages.s3.us-east-2.amazonaws.com/onemoretime0.png"> -->
-<!-- the message:<br>
-{{placeToDisplay?.Item?.Name}}<br>
-{{placeToDisplay?.Item?.Date}}<br>
-{{placeToDisplay?.Item?.Comments}}<br>
+        <app-image-viewer *ngFor="let preview of imagePreviews;let i = index" [preview]="preview" [i]="i" (removeImage)="removeImage(i)"></app-image-viewer>
+    
+        <button mat-button class="glassCardButton" (click)="imageUploader.click()">
+            <mat-icon>photo_camera</mat-icon>
+            Add Image
+        </button>
+        <input type="file" multiple class="hidden" #imageUploader (change)="imageUploadHandler($event)" accept="image/*">
 
-<img *ngFor="let image of placeToDisplay?.Item?.Images" src="https://osteroushimages.s3.us-east-2.amazonaws.com/{{image}}"/> -->
+    </section>
+    <footer>
+        <button mat-button class="glassCardButton" (click)="saveButtonHandler()">
+            Save
+        </button>
+    </footer>
+</main>

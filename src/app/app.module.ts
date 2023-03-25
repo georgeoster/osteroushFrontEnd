@@ -9,8 +9,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { HamburgerMenuComponent } from './components/hamburger-menu/hamburger-menu.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatIconModule} from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+
 import { HomeComponent } from './components/home/home.component';
+import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +28,8 @@ import { HomeComponent } from './components/home/home.component';
     HeaderComponent,
     HamburgerMenuComponent,
     MenuComponent,
-    HomeComponent
+    HomeComponent,
+    ImageViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +37,13 @@ import { HomeComponent } from './components/home/home.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

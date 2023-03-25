@@ -5,3 +5,7 @@ h2 {
 p {
     margin-bottom: 0;
 }
+
+section {
+    padding: 1.5em;
+}

@@ -10,6 +10,9 @@ export class AddPlaceComponent {
 
   placeToDisplay:any;
   message:String = '';
+  imagePreviews: string[] = [];
+  reader:FileReader = new FileReader();
+  i:number = 0;
 
   constructor(private placesService:PlacesService){
     placesService.placeToDisplay.subscribe((res)=>{
@@ -18,7 +21,6 @@ export class AddPlaceComponent {
       this.placeToDisplay = res;
       this.message = res.message;
     });
-    // placesService.getPlace('testing utils', '2023-03-07');
    }
 
   name:string='';
@@ -29,6 +31,26 @@ export class AddPlaceComponent {
   imageUploadHandler(e:any) {
     console.log(e);
     this.imagesToUpload.push(...e?.target?.files);
+    this.reader.onload = () => {
+      if ( !this.imagePreviews.includes(this.reader.result as string) ) {
+        this.imagePreviews.push((this.reader.result as string));
+      }
+      this.i++;
+      if (this.i !== this.imagesToUpload.length) {
+        this.readIn();
+      }
+    }
+    this.i = 0;
+    this.readIn();
+  }
+
+  readIn(){
+    this.reader.readAsDataURL(this.imagesToUpload[this.i]);
+  }
+
+  removeImage(i:number){
+    this.imagesToUpload.splice(i,1);
+    this.imagePreviews.splice(i,1);
   }
 
   saveButtonHandler() {
