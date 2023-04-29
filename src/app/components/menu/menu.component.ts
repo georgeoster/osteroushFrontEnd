@@ -35,6 +35,8 @@ export class MenuComponent {
 
   viewHandler() {
     console.log('viewHandler called');
+    this.router.navigate(['viewPlaces']);
+    this.closeMenu();
   }
 
   addHandler() {

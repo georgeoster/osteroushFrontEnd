@@ -17,9 +17,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 import { HomeComponent } from './components/home/home.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
+import { ViewPlacesComponent } from './components/view-places/view-places.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
     HamburgerMenuComponent,
     MenuComponent,
     HomeComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    ViewPlacesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,9 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

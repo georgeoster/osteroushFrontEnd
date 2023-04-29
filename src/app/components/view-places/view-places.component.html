@@ -1,0 +1,19 @@
+<mat-accordion multi>
+    <mat-expansion-panel *ngFor="let place of places" class="glassCard">
+
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{getMonthFor(place.MonthVisited)}} - {{place?.PlaceName}}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p class="comments">
+            {{place?.Comments}}
+        </p>
+    
+        
+
+        <img 
+        *ngFor="let url of place.Images"
+        src="https://osteroushimages.s3.us-east-2.amazonaws.com/{{url}}">
+
+    </mat-expansion-panel>
+</mat-accordion>
