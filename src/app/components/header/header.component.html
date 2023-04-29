@@ -1,3 +1,12 @@
 <header>
-    <app-hamburger-menu></app-hamburger-menu>
+    <div class="hamburgerAndBrand">
+        <app-hamburger-menu></app-hamburger-menu>
+        {{brand}}
+    </div>
+    
+    <div class="year" *ngIf="showYear">
+        <mat-select panelClass="panel" [(value)]="selectedYear" (selectionChange)="yearSelected($event)">
+            <mat-option [value]="year.value" *ngFor="let year of years">{{ year.label }}</mat-option>
+        </mat-select>
+    </div>
 </header>

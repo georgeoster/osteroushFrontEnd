@@ -8,19 +8,38 @@ import { PlacesService } from 'src/app/services/places.service';
 })
 export class AddPlaceComponent {
 
-  placeToDisplay:any;
-  message:String = '';
   imagePreviews: string[] = [];
   reader:FileReader = new FileReader();
   i:number = 0;
 
+  months=[
+    {label: 'Jan', value: '1'},
+    {label: 'Feb', value: '2'},
+    {label: 'Mar', value: '3'},
+    {label: 'Apr', value: '4'},
+    {label: 'May', value: '5'},
+    {label: 'Jun', value: '6'},
+    {label: 'Jul', value: '7'},
+    {label: 'Aug', value: '8'},
+    {label: 'Sep', value: '9'},
+    {label: 'Oct', value: '10'},
+    {label: 'Nov', value: '11'},
+    {label: 'Dec', value: '12'}
+  ];
+  month:string='';
+
+  years=[
+    {label: '2023', value: '2023'},
+    {label: '2022', value: '2022'},
+    {label: '2021', value: '2021'},
+    {label: '2020', value: '2020'},
+    {label: '2019', value: '2019'},
+    {label: '2018', value: '2018'},
+    {label: '2017', value: '2017'}
+  ];
+  year:string='';
+
   constructor(private placesService:PlacesService){
-    placesService.placeToDisplay.subscribe((res)=>{
-      console.log('OBSERVABLE FIRES WITH:');
-      console.log(res);
-      this.placeToDisplay = res;
-      this.message = res.message;
-    });
    }
 
   name:string='';
@@ -56,37 +75,13 @@ export class AddPlaceComponent {
   saveButtonHandler() {
     const placeToUpload = new FormData();
     placeToUpload.append('name', this.name);
-    placeToUpload.append('date', this.date.toString());
+    placeToUpload.append('month', this.month.toString());
+    placeToUpload.append('year', this.year.toString());
     placeToUpload.append('comments', this.comments);
     this.imagesToUpload.forEach((image, i) => {
       placeToUpload.append('image'+i, image);
     });
-    this.logIt(placeToUpload);
     this.placesService.addPlace(placeToUpload);
   }
 
-  updateButtonHandler() {
-    const placeToUpdate = new FormData();
-    placeToUpdate.append('name', this.name);
-    placeToUpdate.append('date', this.date.toString());
-    placeToUpdate.append('comments', this.comments);
-    placeToUpdate.append('imagesToDelete', this.comments);
-    
-    //TODO, append imagesToDelete 
-    //TODO, append new images
-    this.placesService.updatePlace(placeToUpdate);
-  }
-
-  deleteButtonHandler() {
-    this.placesService.deletePlace(this.name, this.date.toString());
-  }
-
-  logIt(placeToUpload:FormData) {
-    console.log(placeToUpload.getAll('name'));
-    console.log(placeToUpload.getAll('date'));
-    console.log(placeToUpload.getAll('comments'));
-    this.imagesToUpload.forEach((image, i) => {
-      console.log(placeToUpload.getAll('image'+i));
-    });
-  }
 }

@@ -2,8 +2,12 @@ input {
     margin: .5em 0;
 }
 
-mat-form-field {
+.fullWidth {
     min-width: 100%;
+}
+
+.width {
+    max-width: 45%;
 }
 
 mat-label {
