@@ -123,3 +123,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-bottom-right-radius: 0;
     border-bottom: 1px solid rgb(201, 195, 231, .5);
 }
+
+.errorSnackBar {
+    --mdc-snackbar-container-color: #b72b2b;
+    --mat-mdc-snack-bar-button-color: var(--font-color);
+    --mdc-snackbar-supporting-text-color: var(--font-color);
+}
+
+.successSnackBar {
+    --mdc-snackbar-container-color: #12a238;
+    --mat-mdc-snack-bar-button-color: var(--font-color);
+    --mdc-snackbar-supporting-text-color: var(--font-color);
+}
+
+.snackBar {
+    max-width: min-content;
+    width: min-content;
+    white-space: nowrap;
+    margin: 8px auto !important;
+}

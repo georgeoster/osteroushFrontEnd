@@ -1,0 +1,15 @@
+<main class="glassCard flexColumn">
+    <mat-form-field class="fullWidth">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="user">
+    </mat-form-field>
+    <mat-form-field class="fullWidth">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="pass" [type]="obfuscatePassword ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="obfuscatePassword = !obfuscatePassword">{{obfuscatePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>
+    <button mat-button class="glassCardButton" (click)="login()">
+        <mat-spinner *ngIf="loading"></mat-spinner>
+        <span *ngIf="!loading">Log In</span>
+    </button>
+</main>

@@ -19,11 +19,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HomeComponent } from './components/home/home.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 import { ViewPlacesComponent } from './components/view-places/view-places.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { ViewPlacesComponent } from './components/view-places/view-places.compon
     MenuComponent,
     HomeComponent,
     ImageViewerComponent,
-    ViewPlacesComponent
+    ViewPlacesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,9 @@ import { ViewPlacesComponent } from './components/view-places/view-places.compon
     MatTableModule,
     MatButtonModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

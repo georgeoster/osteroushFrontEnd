@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
@@ -12,9 +13,9 @@ export class MenuComponent {
   showMenu:boolean = false;
   menuItems:Array<{icon:string, label:string, handler: any}> = [];
 
-  constructor(private menuService:MenuService, private router: Router){
+  constructor(private menuService:MenuService, private loginService:LoginService, private router: Router){
     this.subscribeToMenuService();
-    this.subscribeToSignedInService();
+    this.subscribeToLogInService();
   }
 
   subscribeToMenuService(){
@@ -28,36 +29,45 @@ export class MenuComponent {
   }
 
   homeHandler() {
-    console.log('homeHandler called');
     this.router.navigate(['home']);
     this.closeMenu();
   }
 
   viewHandler() {
-    console.log('viewHandler called');
     this.router.navigate(['viewPlaces']);
     this.closeMenu();
   }
 
   addHandler() {
-    console.log('addHandler called');
     this.router.navigate(['addPlace']);
     this.closeMenu();
   }
 
   signInHandler() {
-    console.log('signInHandler called');
+    this.router.navigate(['login']);
+    this.closeMenu();
+  }
+
+  signOutHandler() {
+    this.loginService.logout();
+    this.router.navigate(['home']);
+    this.closeMenu();
   }
 
 
-  subscribeToSignedInService(){
-    //TODO create signedinservice.
-    this.menuItems = [
-      {icon: 'home', label: 'Home', handler: this.homeHandler.bind(this)},
-      {icon: 'visibility', label: 'View Places', handler: this.viewHandler.bind(this)},
-      {icon: 'restaurant', label: 'Add Place', handler: this.addHandler.bind(this)},
-      {icon: 'person', label: 'Sign In', handler: this.signInHandler.bind(this)}
-    ]
+  subscribeToLogInService(){
+    this.loginService.loggedIn.subscribe((loggedIn:boolean) => {
+      this.menuItems = [
+        {icon: 'home', label: 'Home', handler: this.homeHandler.bind(this)},
+        {icon: 'visibility', label: 'View Places', handler: this.viewHandler.bind(this)}
+      ]
+      if (loggedIn) {
+        this.menuItems.push({icon: 'restaurant', label: 'Add Place', handler: this.addHandler.bind(this)});
+        this.menuItems.push({icon: 'person', label: 'Sign Out', handler: this.signOutHandler.bind(this)});
+      } else {
+        this.menuItems.push({icon: 'person', label: 'Sign In', handler: this.signInHandler.bind(this)});
+      }
+    });
   }
 
 }
