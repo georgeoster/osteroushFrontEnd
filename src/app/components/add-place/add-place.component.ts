@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PlacesService } from 'src/app/services/places.service';
 import { notify } from 'src/app/utils/notifyUtils';
 
@@ -41,14 +42,23 @@ export class AddPlaceComponent {
     {label: '2017', value: '2017'}
   ];
   year:string='';
+  placesServiceSubscription: Subscription = new Subscription;
 
   constructor(private placesService:PlacesService, private router: Router, private snackBar:MatSnackBar){
-    this.placesService.placeAdded.subscribe(added => {
+    this.subscribeToPlacesService();
+  }
+
+  subscribeToPlacesService(){
+    this.placesServiceSubscription = this.placesService.placeAdded.subscribe(added => {
       if(added) {
         notify(this.snackBar, 'Successfully added '+this.name, 'successSnackBar');
         this.router.navigate(['viewPlaces']);
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.placesServiceSubscription.unsubscribe();
   }
 
   name:string='';
@@ -57,7 +67,6 @@ export class AddPlaceComponent {
   imagesToUpload:File[]=[];
 
   imageUploadHandler(e:any) {
-    console.log(e);
     this.imagesToUpload.push(...e?.target?.files);
     this.reader.onload = () => {
       if ( !this.imagePreviews.includes(this.reader.result as string) ) {

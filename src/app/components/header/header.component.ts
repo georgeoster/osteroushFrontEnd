@@ -33,8 +33,7 @@ export class HeaderComponent {
     });
 
     this.router.events.subscribe((event:Event)=>{
-      if (event instanceof NavigationEnd) {        
-        console.log(event.url);
+      if (event instanceof NavigationEnd) {      
         if (event.url==='/home') {
           this.brand = 'Osteroush';
           this.showYear = false;
