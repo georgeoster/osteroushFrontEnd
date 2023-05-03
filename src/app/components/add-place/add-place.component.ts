@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { PlacesService } from 'src/app/services/places.service';
+import { notify } from 'src/app/utils/notifyUtils';
 
 @Component({
   selector: 'app-add-place',
@@ -39,8 +42,14 @@ export class AddPlaceComponent {
   ];
   year:string='';
 
-  constructor(private placesService:PlacesService){
-   }
+  constructor(private placesService:PlacesService, private router: Router, private snackBar:MatSnackBar){
+    this.placesService.placeAdded.subscribe(added => {
+      if(added) {
+        notify(this.snackBar, 'Successfully added '+this.name, 'successSnackBar');
+        this.router.navigate(['viewPlaces']);
+      }
+    });
+  }
 
   name:string='';
   date = new Date('');

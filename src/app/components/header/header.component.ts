@@ -27,6 +27,11 @@ export class HeaderComponent {
   }
 
   constructor(private router: Router, private placesService: PlacesService ) {
+
+    this.placesService.yearToShow.subscribe((year:any)=>{
+      this.selectedYear = year.toString();
+    });
+
     this.router.events.subscribe((event:Event)=>{
       if (event instanceof NavigationEnd) {        
         console.log(event.url);

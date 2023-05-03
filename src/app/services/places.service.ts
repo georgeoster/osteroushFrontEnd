@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // import { Place } from '../types';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlacesService {
 
-  private placeToDisplaySubject = new BehaviorSubject(<any>{});
-  placeToDisplay = this.placeToDisplaySubject.asObservable();
+  private placeAddedSubject = new Subject();
+  placeAdded = this.placeAddedSubject.asObservable();
+
+  private yearToShowSubject = new Subject();
+  yearToShow = this.yearToShowSubject.asObservable();
 
   private placesSubject = new BehaviorSubject(<any>[]);
   places = this.placesSubject.asObservable();
@@ -17,8 +20,12 @@ export class PlacesService {
   constructor(private http:HttpClient) { }
 
   addPlace(place:FormData) {
-    this.http.post('http://osteroush-env.eba-puhnr5j3.us-east-2.elasticbeanstalk.com/api/v1/place', place).subscribe((response) => {
-      console.log(response);
+    const year = place.get('year');
+    this.http.post('http://osteroush-env.eba-puhnr5j3.us-east-2.elasticbeanstalk.com/api/v1/place', place).subscribe((response:any) => {
+      if (response?.success) {
+        this.yearToShowSubject.next(year);
+        this.placeAddedSubject.next(true);
+      }
     });
   }
 
