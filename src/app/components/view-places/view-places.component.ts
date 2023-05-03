@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
 import { PlacesService } from 'src/app/services/places.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { PlacesService } from 'src/app/services/places.service';
 })
 export class ViewPlacesComponent {
   places:{PlaceName:string, Comments:string, Images:[], MonthVisited:string}[] = [];
-
+  placesServiceSubscription:Subscription = new Subscription;
   monthsEnum=[
     {label: 'Jan', value: '1'},
     {label: 'Feb', value: '2'},
@@ -28,6 +29,9 @@ export class ViewPlacesComponent {
   constructor(private placesService:PlacesService) {
     this.getPlaces();
   }
+  ngOnDestroy() {
+    this.placesServiceSubscription.unsubscribe();
+  }
 
   getMonthFor(value:string) {
     return this.monthsEnum.find(m=>m.value===value)?.label;
@@ -43,12 +47,12 @@ export class ViewPlacesComponent {
   }
 
   async getPlaces() {
-    this.placesService.places.subscribe((res:{Count:number, Items: []})=>{
-      console.log(res.Items);
-      this.places = [];
-      this.places.push(...res.Items);
-      this.sortByMonth();
-      console.log(this.places);
+    this.placesServiceSubscription = this.placesService.places.subscribe((res:{Count:number, Items: []})=>{
+      if(res?.Items) {
+        this.places = [];
+        this.places.push(...res.Items);
+        this.sortByMonth();
+      }
     });
   }
 

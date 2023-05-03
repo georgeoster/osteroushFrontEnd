@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { MenuService } from 'src/app/services/menu.service';
 
@@ -12,10 +13,17 @@ export class MenuComponent {
 
   showMenu:boolean = false;
   menuItems:Array<{icon:string, label:string, handler: any}> = [];
+  menuServiceSubscription:Subscription = new Subscription;
+  loginServiceSubscription:Subscription = new Subscription;
 
   constructor(private menuService:MenuService, private loginService:LoginService, private router: Router){
     this.subscribeToMenuService();
     this.subscribeToLogInService();
+  }
+
+  ngOnDestroy() {
+    this.menuServiceSubscription.unsubscribe();
+    this.loginServiceSubscription.unsubscribe();
   }
 
   subscribeToMenuService(){

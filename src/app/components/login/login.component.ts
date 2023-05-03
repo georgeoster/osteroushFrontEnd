@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { notify } from 'src/app/utils/notifyUtils';
 
@@ -16,18 +17,22 @@ export class LoginComponent {
   loading:boolean=false;
   attempted:boolean=false;
   obfuscatePassword:boolean=true;
-  loginServiceSubscription:any;
+  loginServiceSubscription: Subscription = new Subscription;
 
   constructor(private loginService: LoginService, private router: Router, private snackBar:MatSnackBar){
+    this.subscribeToLoginService();
+  }
+
+  subscribeToLoginService(){
     this.loginServiceSubscription = this.loginService.loggedIn.subscribe((loggedIn) => {
       this.loading = false;
       if (loggedIn) {
-        notify(snackBar, 'Successfully logged in', 'successSnackBar');
+        notify(this.snackBar, 'Successfully logged in', 'successSnackBar');
         this.router.navigate(['home']);
       }
       if (!loggedIn && this.attempted) {
         this.loading = false;
-        notify(snackBar, 'Username or password is incorrect', 'errorSnackBar');
+        notify(this.snackBar, 'Username or password is incorrect', 'errorSnackBar');
       }
     });
   }
