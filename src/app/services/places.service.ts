@@ -16,6 +16,9 @@ export class PlacesService {
   private placesSubject = new BehaviorSubject(<any>[]);
   places = this.placesSubject.asObservable();
 
+  private loadingSubject = new Subject();
+  loading = this.loadingSubject.asObservable();
+
   constructor(private http:HttpClient) { }
 
   addPlace(place:FormData) {
@@ -35,6 +38,7 @@ export class PlacesService {
   }
 
   getPlaces(year:string) {
+    this.loadingSubject.next(true);
     this.http.get('https://osteroush.com/BackEnd/api/v1/places/'+year).subscribe((response) => {
       this.placesSubject.next(response);
     });

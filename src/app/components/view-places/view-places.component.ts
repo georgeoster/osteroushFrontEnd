@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { Subscription } from 'rxjs';
 import { PlacesService } from 'src/app/services/places.service';
 
@@ -9,8 +9,12 @@ import { PlacesService } from 'src/app/services/places.service';
   styleUrls: ['./view-places.component.css']
 })
 export class ViewPlacesComponent {
+  spinnerColor:string = '#e8eaf5';
+  spinnerMode:ProgressSpinnerMode = 'indeterminate';
+  loading:boolean = true;
   places:{PlaceName:string, Comments:string, Images:[], MonthVisited:string}[] = [];
   placesServiceSubscription:Subscription = new Subscription;
+  loadingSubscription:Subscription = new Subscription;
   monthsEnum=[
     {label: 'Jan', value: '1'},
     {label: 'Feb', value: '2'},
@@ -27,10 +31,19 @@ export class ViewPlacesComponent {
   ];
 
   constructor(private placesService:PlacesService) {
+    this.loading = true;
     this.getPlaces();
+    this.subscribeToLoadingService();
+  }
+  
+  subscribeToLoadingService() {
+    this.loadingSubscription = this.placesService.loading.subscribe((loading:any) => {
+      this.loading = loading;
+    });
   }
   ngOnDestroy() {
     this.placesServiceSubscription.unsubscribe();
+    this.loadingSubscription.unsubscribe();
   }
 
   getMonthFor(value:string) {
@@ -52,6 +65,7 @@ export class ViewPlacesComponent {
         this.places = [];
         this.places.push(...res.Items);
         this.sortByMonth();
+        this.loading = false;
       }
     });
   }
