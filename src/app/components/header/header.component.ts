@@ -33,20 +33,22 @@ export class HeaderComponent {
     });
 
     this.router.events.subscribe((event:Event)=>{
-      if (event instanceof NavigationEnd) {      
+      if (event instanceof NavigationEnd) {  
+
         if (event.url==='/home') {
           this.brand = 'Osteroush';
-          this.showYear = false;
         }
         if (event.url==='/viewPlaces') {
           this.brand = 'View Places';
-          this.showYear = true;
           this.placesService.getPlaces(this.selectedYear);
         } 
         if (event.url==='/addPlace') {
           this.brand = 'Add Place';
-          this.showYear = false;
         }
+        if (event.url==='/login') {
+          this.brand = 'Sign In';
+        }
+        this.showYear = event.url === '/viewPlaces';
     }
     });
   }
