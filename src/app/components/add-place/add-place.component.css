@@ -34,3 +34,15 @@ footer {
 section {
     padding: 1.5em 1.5em 2em 1.5em
 }
+mat-spinner {
+    width: 1em !important;
+    height: 1em !important;
+}
+
+.mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: var(--font-color);
+}
+
+.mdc-circular-progress {
+    position: initial;
+}

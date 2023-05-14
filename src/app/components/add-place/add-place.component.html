@@ -36,7 +36,8 @@
     </section>
     <footer>
         <button mat-button class="glassCardButton" (click)="saveButtonHandler()">
-            Save
+            <mat-spinner *ngIf="loading"></mat-spinner>
+            <span *ngIf="!loading">Save</span>
         </button>
     </footer>
 </main>

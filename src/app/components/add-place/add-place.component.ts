@@ -11,6 +11,7 @@ import { notify } from 'src/app/utils/notifyUtils';
   styleUrls: ['./add-place.component.css']
 })
 export class AddPlaceComponent {
+  loading:boolean = false;
 
   imagePreviews: string[] = [];
   reader:FileReader = new FileReader();
@@ -91,6 +92,7 @@ export class AddPlaceComponent {
   }
 
   saveButtonHandler() {
+    this.loading = true;
     const placeToUpload = new FormData();
     placeToUpload.append('name', this.name);
     placeToUpload.append('month', this.month.toString());
