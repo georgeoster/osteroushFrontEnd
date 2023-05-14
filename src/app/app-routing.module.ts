@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'addPlace', component: AddPlaceComponent },
   { path: 'viewPlaces', component: ViewPlacesComponent },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: 'addPlace', pathMatch: 'full' }
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
