@@ -5,6 +5,15 @@
     diameter="125"
     strokeWidth="10"
 />
+
+<main class="glassCard" *ngIf="!loading && places.length < 1">
+    <section>
+        <h2>Oops!</h2>
+        <p>Looks like we didn't (or haven't yet) gone anywhere this year.<br><br>
+            Well, that or we are just being slow to update. Sometimes life gets busy, ya know?</p>
+    </section>
+</main>
+
 <mat-accordion *ngIf="!loading" multi>
     <mat-expansion-panel *ngFor="let place of places" class="glassCard">
         <mat-expansion-panel-header>
