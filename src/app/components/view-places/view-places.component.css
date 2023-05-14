@@ -20,6 +20,11 @@
     justify-content: center;
 }
 
+mat-progress-spinner {
+    margin: 5em auto auto auto;
+    --mdc-circular-progress-active-indicator-color: var(--font-color);
+    opacity: .6;
+}
 mat-expansion-panel {
     margin: 0 auto 1em auto;
     border-radius: 10px !important;
