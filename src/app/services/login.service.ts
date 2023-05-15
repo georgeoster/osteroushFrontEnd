@@ -13,7 +13,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(user:string, pass:string) {
-    this.http.get('http://localHost:3000/api/v1/login/'+user+'/'+pass).subscribe((response:any) => {
+    this.http.get('https://osteroush.com/BackEnd/api/v1/login/'+user+'/'+pass).subscribe((response:any) => {
       this.loggedInSubject.next(response.login);
     });
   }
