@@ -48,7 +48,7 @@ export class PlacesService {
   }
 
   deletePlace(place:FormData) {
-    this.http.request('delete', 'http://localhost:3000/BackEnd/api/v1/place/', { body: place }).subscribe((response:any) => {
+    this.http.request('delete', 'https://osteroush.com/BackEnd/api/v1/place/', { body: place }).subscribe((response:any) => {
       if (response?.success) {
         this.deleteSuccessfulSubject.next(true);
       } else {
