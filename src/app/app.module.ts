@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { HomeComponent } from './components/home/home.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
@@ -55,7 +56,8 @@ import { LoginComponent } from './components/login/login.component';
     MatSelectModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,5 +23,11 @@
             {{place?.Comments}}
         </p>
         <img *ngFor="let url of place.Images" src="https://osteroushimages.s3.us-east-2.amazonaws.com/{{url}}">
+        <footer>
+            <button *ngIf="loggedIn" mat-button class="glassCardButton deleteButton" (click)="deletePlace(place)">
+                <mat-spinner *ngIf="deleting"></mat-spinner>
+                <span *ngIf="!deleting">Delete</span>
+            </button>
+        </footer>
     </mat-expansion-panel>
 </mat-accordion>
