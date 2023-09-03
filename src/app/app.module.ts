@@ -27,6 +27,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 import { ViewPlacesComponent } from './components/view-places/view-places.component';
 import { LoginComponent } from './components/login/login.component';
+import { EditPlaceComponent } from './components/edit-place/edit-place.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { LoginComponent } from './components/login/login.component';
     HomeComponent,
     ImageViewerComponent,
     ViewPlacesComponent,
-    LoginComponent
+    LoginComponent,
+    EditPlaceComponent
   ],
   imports: [
     BrowserModule,

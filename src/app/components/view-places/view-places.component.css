@@ -15,19 +15,6 @@ section {
     padding: 1.5em;
 }
 
-.footer {
-    padding: 1em 1.25em;
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 30px rgb(0 0 0 /10%);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    color: var(--font-color);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
 mat-progress-spinner {
     margin: 5em auto auto auto;
     --mdc-circular-progress-active-indicator-color: var(--font-color);
@@ -59,4 +46,8 @@ footer {
     flex-direction: row;
     justify-content: flex-end;
     margin-top: 1em;
+}
+
+.editButton {
+    margin-right: 1em;
 }

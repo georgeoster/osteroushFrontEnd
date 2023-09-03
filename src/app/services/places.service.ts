@@ -22,6 +22,9 @@ export class PlacesService {
   private deleteSuccessfulSubject = new Subject();
   deleteSuccessful = this.deleteSuccessfulSubject.asObservable();
 
+  private patchSuccessfulSubject = new Subject();
+  patchSuccessful = this.patchSuccessfulSubject.asObservable();
+
   constructor(private http:HttpClient) { }
 
   addPlace(place:FormData) {
@@ -35,8 +38,12 @@ export class PlacesService {
   }
 
   updatePlace(place:FormData) {
-    this.http.patch('https://osteroush.com/BackEnd/api/v1/place', place).subscribe((response) => {
-      console.log(response);
+    this.http.patch('https://osteroush.com/BackEnd/api/v1/place', place).subscribe((response:any) => {
+      if (response?.success) {
+        this.patchSuccessfulSubject.next(true);
+      } else {
+        this.patchSuccessfulSubject.next(false);
+      }
     });
   }
 
@@ -47,9 +54,9 @@ export class PlacesService {
     });
   }
 
-  deletePlace(place:FormData) {
+  deletePlace(place:any) {
     this.http.request('delete', 'https://osteroush.com/BackEnd/api/v1/place/', { body: place }).subscribe((response:any) => {
-      if (response?.success) {
+    if (response?.success) {
         this.deleteSuccessfulSubject.next(true);
       } else {
         this.deleteSuccessfulSubject.next(false);

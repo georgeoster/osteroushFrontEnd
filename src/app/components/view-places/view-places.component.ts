@@ -6,6 +6,8 @@ import { LoginService } from 'src/app/services/login.service';
 import { PlacesService } from 'src/app/services/places.service';
 import { notify } from 'src/app/utils/notifyUtils';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { EditService } from 'src/app/services/edit.service';
 
 @Component({
   selector: 'app-view-places',
@@ -39,7 +41,13 @@ export class ViewPlacesComponent {
     {label: 'Dec', value: '12'}
   ];
 
-  constructor(private placesService:PlacesService, private loginService: LoginService, private snackBar:MatSnackBar, private dialog: MatDialog) {
+  constructor(
+    private placesService:PlacesService, 
+    private loginService: LoginService, 
+    private snackBar:MatSnackBar, 
+    private dialog: MatDialog, 
+    private router: Router,
+    private editService: EditService) {
     this.loading = true;
     this.getPlaces();
     this.subscribeToLoadingService();
@@ -94,8 +102,19 @@ export class ViewPlacesComponent {
   async deletePlace(place:any) {
     this.deleting = true;
     this.toDelete = place;
-    this.placesService.deletePlace(place);
+    const placeToDelete:any = {
+      PlaceName: place.PlaceName
+    }
+    if(place.Images?.length > 0) {
+      placeToDelete.Images = JSON.stringify(place.Images)
+    }
+    this.placesService.deletePlace(placeToDelete);
     this.deleting = false;
+  }
+
+  editPlace(place:any) {
+    this.editService.setToEdit(place);
+    this.router.navigate(['editPlace']);
   }
 
   async getPlaces() {
