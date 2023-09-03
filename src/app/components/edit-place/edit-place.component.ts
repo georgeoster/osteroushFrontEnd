@@ -2,18 +2,22 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { EditService } from 'src/app/services/edit.service';
 import { PlacesService } from 'src/app/services/places.service';
 import { notify } from 'src/app/utils/notifyUtils';
 
 @Component({
-  selector: 'app-add-place',
-  templateUrl: './add-place.component.html',
-  styleUrls: ['./add-place.component.css']
+  selector: 'app-edit-place',
+  templateUrl: './edit-place.component.html',
+  styleUrls: ['./edit-place.component.css']
 })
-export class AddPlaceComponent {
+export class EditPlaceComponent {
   loading:boolean = false;
 
+  images: string[] = [];
   imagePreviews: string[] = [];
+  preExistingImages: string[] = [];
+  imagesToDelete: string[] = [];
   reader:FileReader = new FileReader();
   i:number = 0;
 
@@ -43,10 +47,48 @@ export class AddPlaceComponent {
     {label: '2017', value: '2017'}
   ];
   year:string='';
-  placesServiceSubscription: Subscription = new Subscription;
 
-  constructor(private placesService:PlacesService, private router: Router, private snackBar:MatSnackBar){
+  placesServiceSubscription: Subscription = new Subscription;
+  editServiceSubscription:Subscription = new Subscription;
+  patchServiceSubscription: Subscription = new Subscription;
+
+  constructor(private placesService:PlacesService, private router: Router, private snackBar:MatSnackBar, private editService: EditService){
+    this.subscribeToEditService();
     this.subscribeToPlacesService();
+    this.subscribeToPatchService();
+  }
+
+  subscribeToPatchService() {
+    this.patchServiceSubscription = this.placesService.patchSuccessful.subscribe((success:any) => {
+      if(success) {
+        notify(this.snackBar, this.name + ' has been updated', 'successSnackBar');
+        this.router.navigate(['viewPlaces']);
+      } else {
+        notify(this.snackBar, 'error encountered while updating ' + this.name , 'errorSnackBar');
+      }
+    });
+  }
+
+  subscribeToEditService() {
+    this.editServiceSubscription = this.editService.toEdit.subscribe((place:any) => {
+      if (place) {
+        this.name = place?.PlaceName;
+        this.month = place?.MonthVisited;
+        this.year = place?.YearVisited;
+        this.comments = place?.Comments;
+      }
+      if(place?.Images?.length > 0) {
+        this.images = place.Images;
+        this.processImages(place.Images);
+      }
+    });
+  }
+
+  processImages(images:[]){
+    images.forEach((image) => {
+      const url = 'https://osteroushimages.s3.us-east-2.amazonaws.com/'+image;
+      this.preExistingImages.push(url);
+    });
   }
 
   subscribeToPlacesService(){
@@ -60,6 +102,8 @@ export class AddPlaceComponent {
 
   ngOnDestroy() {
     this.placesServiceSubscription.unsubscribe();
+    this.editServiceSubscription.unsubscribe();
+    this.patchServiceSubscription.unsubscribe();
   }
 
   name:string='';
@@ -91,6 +135,14 @@ export class AddPlaceComponent {
     this.imagePreviews.splice(i,1);
   }
 
+  removePreExistingImage(i:number){
+    const completeUrl = this.preExistingImages[i];
+    const lastSlashIndex = completeUrl.lastIndexOf('/');
+    const toDelete = completeUrl.slice(lastSlashIndex + 1, completeUrl.length);
+    this.imagesToDelete.push(toDelete);
+    this.preExistingImages.splice(i,1);
+  }
+
   saveButtonHandler() {
     this.loading = true;
     const placeToUpload = new FormData();
@@ -98,11 +150,12 @@ export class AddPlaceComponent {
     placeToUpload.append('month', this.month.toString());
     placeToUpload.append('year', this.year.toString());
     placeToUpload.append('comments', this.comments);
+    placeToUpload.append('imagesToDelete', JSON.stringify(this.imagesToDelete));
+    placeToUpload.append('images', JSON.stringify(this.images));
+
     this.imagesToUpload.forEach((image, i) => {
       placeToUpload.append('image'+i, image);
     });
-    placeToUpload.append('lastImageIndex', this.imagesToUpload.length.toString());
-    this.placesService.addPlace(placeToUpload);
+    this.placesService.updatePlace(placeToUpload);
   }
-
 }

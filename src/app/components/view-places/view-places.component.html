@@ -24,7 +24,11 @@
         </p>
         <img *ngFor="let url of place.Images" src="https://osteroushimages.s3.us-east-2.amazonaws.com/{{url}}">
         <footer>
-            <button *ngIf="loggedIn" mat-button class="glassCardButton deleteButton" (click)="deletePlace(place)">
+            <!-- -->
+            <button *ngIf="loggedIn && !deleting" mat-button class="glassCardButton editButton" (click)="editPlace(place)">
+                Edit
+            </button>
+            <button *ngIf="loggedIn" mat-button class="glassCardButton" (click)="deletePlace(place)">
                 <mat-spinner *ngIf="deleting"></mat-spinner>
                 <span *ngIf="!deleting">Delete</span>
             </button>
