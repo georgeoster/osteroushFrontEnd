@@ -1,15 +1,80 @@
-<main class="glassCard flexColumn">
-    <mat-form-field class="fullWidth">
-        <mat-label>Username</mat-label>
-        <input matInput [(ngModel)]="user">
-    </mat-form-field>
-    <mat-form-field class="fullWidth">
-        <mat-label>Password</mat-label>
-        <input matInput [(ngModel)]="pass" [type]="obfuscatePassword ? 'password' : 'text'">
-        <mat-icon matSuffix (click)="obfuscatePassword = !obfuscatePassword">{{obfuscatePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </mat-form-field>
-    <button mat-button class="glassCardButton" (click)="login()">
-        <mat-spinner *ngIf="loading"></mat-spinner>
+<div class="relative z-10 flex justify-center px-4">
+  <main class="w-full max-w-md p-8 mt-10 border shadow-lg rounded-2xl bg-white/20 backdrop-blur-md border-white/30">
+    <section class="flex flex-col space-y-6">
+      <!-- Username Field -->
+      <div class="flex flex-col">
+        <label for="username" class="mb-2 font-semibold text-neutral-200">Username</label>
+        <input
+          id="username"
+          [(ngModel)]="user"
+          type="text"
+          class="w-full p-3 border rounded-md border-white/30 bg-white/10 text-neutral-100 placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+          placeholder="Enter your username"
+        />
+      </div>
+
+      <!-- Password Field -->
+      <div class="flex flex-col">
+        <label for="password" class="mb-2 font-semibold text-neutral-200">Password</label>
+        <div class="relative">
+          <input
+            id="password"
+            [(ngModel)]="pass"
+            [type]="obfuscatePassword ? 'password' : 'text'"
+            class="w-full p-3 border rounded-md border-white/30 bg-white/10 pr-14 text-neutral-100 placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+            placeholder="Enter your password"
+          />
+      
+          <button
+            type="button"
+            (click)="obfuscatePassword = !obfuscatePassword"
+            class="absolute flex items-center justify-center w-8 h-8 transition-all duration-200 -translate-y-1/2 bg-transparent rounded-full right-2 top-1/2 hover:bg-white/10 text-neutral-300 hover:text-neutral-100"
+            aria-label="Toggle password visibility"
+          >
+            <svg *ngIf="obfuscatePassword" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+      
+            <svg *ngIf="!obfuscatePassword" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.965 9.965 0 012.642-4.362m4.596-2.522A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a9.964 9.964 0 01-1.118 2.378M15 12a3 3 0 00-3-3m0 0a3 3 0 00-3 3m0 0a3 3 0 003 3m6 6l-18-18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+  
+      <!-- Login Button -->
+      <button
+        (click)="login()"
+        class="flex items-center self-end gap-2 px-6 py-2 font-semibold text-white transition bg-pink-900 rounded-md hover:bg-pink-950 disabled:opacity-50"
+        [disabled]="loading"
+      >
+        <svg
+          *ngIf="loading"
+          class="w-5 h-5 text-white animate-spin"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+          ></path>
+        </svg>
         <span *ngIf="!loading">Log In</span>
-    </button>
-</main>
+      </button>
+    </section>
+  </main>
+</div>
