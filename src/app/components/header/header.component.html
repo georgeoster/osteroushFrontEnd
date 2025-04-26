@@ -1,12 +1,26 @@
-<header>
-    <div class="hamburgerAndBrand">
-        <app-hamburger-menu></app-hamburger-menu>
-        {{brand}}
+<header class="flex items-center justify-between p-4 border-b shadow-md bg-white/20 backdrop-blur-md border-white/30 text-neutral-100">
+  
+  <!-- Left side: Hamburger + Brand -->
+  <div class="flex items-center gap-4">
+    <app-hamburger-menu></app-hamburger-menu>
+    <span class="text-lg font-semibold">{{ brand }}</span>
+  </div>
+
+  <!-- Right side: Year Selector -->
+  <div *ngIf="showYear" class="relative">
+    <select
+      [(ngModel)]="selectedYear"
+      (change)="yearSelected($event)"
+      class="w-32 p-2 pr-10 text-base border rounded-md appearance-none bg-white/10 border-white/30 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+    >
+      <option *ngFor="let year of years" [value]="year.value">{{ year.label }}</option>
+    </select>
+    <!-- Custom Arrow Icon -->
+    <div class="absolute inset-y-0 flex items-center pointer-events-none right-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-neutral-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
     </div>
-    
-    <div class="year" *ngIf="showYear">
-        <mat-select panelClass="panel" [(value)]="selectedYear" (selectionChange)="yearSelected($event)">
-            <mat-option [value]="year.value" *ngFor="let year of years">{{ year.label }}</mat-option>
-        </mat-select>
-    </div>
+  </div>
+
 </header>
