@@ -12,11 +12,10 @@
   flex-direction: row;
 }
 
-.hidden {
+.osteroush-hidden {
   visibility: hidden;
 }
 
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 html,
 body {
