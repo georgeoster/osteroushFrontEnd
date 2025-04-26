@@ -1,0 +1,24 @@
+{
+  // "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["class\\s*=\\s*\"([^\"]*)", "class"],
+    ["class:\\s*'([^']*)", "class"],
+    ["class:\\s*\"([^\"]*)", "class"]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "html",
+    "typescriptreact": "html",
+    "html": "html"
+  },
+  "headwind.runOnSave": true,
+  "headwind.classRegex": {
+    "pattern": "(?:class|className)=\\\"([^\\\"]*)\\\"|class:\\s*'([^']*)'|class:\\s*\\\"([^\\\"]*)\\\""
+  },
+  "headwind.removeDuplicates": true,
+  "css.validate": false,
+  "scss.validate": false
+}
