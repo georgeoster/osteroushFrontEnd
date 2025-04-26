@@ -49,7 +49,7 @@
       <!-- Login Button -->
       <button
         (click)="login()"
-        class="flex items-center self-end gap-2 px-6 py-2 font-semibold text-white transition bg-pink-900 rounded-md hover:bg-pink-950 disabled:opacity-50"
+        class="self-end button-cta"
         [disabled]="loading"
       >
         <svg
@@ -75,6 +75,7 @@
         </svg>
         <span *ngIf="!loading">Log In</span>
       </button>
+
     </section>
   </main>
 </div>

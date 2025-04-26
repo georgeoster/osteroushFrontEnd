@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+  .button-cta {
+    @apply flex items-center gap-2 px-6 py-2 font-semibold text-white transition duration-200 ease-in-out bg-pink-900 rounded-md hover:bg-pink-950 hover:scale-105 hover:shadow-md hover:shadow-pink-500/30 disabled:opacity-50;
+  }
+}
+
 
 .flexColumn {
   display: flex;
