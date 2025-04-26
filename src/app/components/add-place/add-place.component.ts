@@ -107,5 +107,5 @@ export class AddPlaceComponent {
     placeToUpload.append('lastImageIndex', this.imagesToUpload.length.toString());
     this.placesService.addPlace(placeToUpload);
   }
-
+//test commit repo moved to georgeoster account and local user changed to georgeoster
 }
