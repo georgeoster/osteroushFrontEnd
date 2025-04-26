@@ -1,5 +1,5 @@
 <div class="relative z-10 flex justify-center px-4">
-  <main class="w-full max-w-2xl p-8 mt-10 border shadow-lg rounded-2xl bg-white/20 backdrop-blur-md border-white/30">
+  <main class="w-full max-w-2xl p-8 mt-10 border shadow-lg rounded-2xl bg-white/20 backdrop-blur-md border-white/30 animate-fade">
     
     <!-- Header -->
     <header class="pb-4 mb-6 text-2xl font-bold text-center border-b border-white/30 text-neutral-100">
@@ -80,7 +80,7 @@
         <button
           type="button"
           (click)="removePreExistingImage(i)"
-          class="flex items-center justify-center w-8 h-8 text-white transition-all bg-pink-900 rounded-full hover:bg-pink-950"
+          class="flex items-center justify-center w-8 h-8 text-white transition-all bg-pink-900 rounded-full hover:bg-pink-950 active-press"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -94,7 +94,7 @@
         <button
           type="button"
           (click)="removeImage(i)"
-          class="flex items-center justify-center w-8 h-8 text-white transition-all bg-pink-900 rounded-full hover:bg-pink-950"
+          class="flex items-center justify-center w-8 h-8 text-white transition-all bg-pink-900 rounded-full hover:bg-pink-950 active-press"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -106,7 +106,7 @@
       <button
         type="button"
         (click)="imageUploader.click()"
-        class="self-start px-4 py-2 button-cta"
+        class="self-start px-4 py-2 button-cta active-press"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4-4m0 0l-4 4m4-4v12" />
@@ -130,7 +130,7 @@
     <footer class="flex justify-end pt-4 mt-8 border-t border-white/30">
       <button
         (click)="saveButtonHandler()"
-        class="button-cta"
+        class="button-cta active-press"
         [disabled]="loading"
       >
         <svg

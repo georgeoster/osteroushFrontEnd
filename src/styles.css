@@ -7,6 +7,30 @@
   }
 }
 
+@layer utilities {
+  @keyframes fade {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade {
+    animation: fade 0.5s ease-out;
+  }
+}
+
+@layer utilities {
+  .active-press {
+    @apply active:scale-95 active:shadow-inner active:brightness-95;
+  }
+}
+
+
 
 .flexColumn {
   display: flex;
