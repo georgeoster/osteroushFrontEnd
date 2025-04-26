@@ -24,26 +24,43 @@
         <!-- Month Select -->
         <div class="flex flex-col">
           <label for="month" class="mb-2 font-semibold text-neutral-200">Month</label>
-          <select
-            id="month"
-            [(ngModel)]="month"
-            class="w-full p-3 border rounded-md border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
-          >
-            <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
-          </select>
+          <div class="relative">
+            <select
+              id="month"
+              [(ngModel)]="month"
+              class="w-full p-3 pr-10 border rounded-md appearance-none border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+            >
+              <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
+            </select>
+            <!-- Custom Arrow Icon -->
+            <div class="absolute inset-y-0 flex items-center pointer-events-none right-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-neutral-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
         </div>
-  
+
         <!-- Year Select -->
         <div class="flex flex-col">
           <label for="year" class="mb-2 font-semibold text-neutral-200">Year</label>
-          <select
-            id="year"
-            [(ngModel)]="year"
-            class="w-full p-3 border rounded-md border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
-          >
-            <option *ngFor="let year of years" [value]="year.value">{{ year.label }}</option>
-          </select>
+          <div class="relative">
+            <select
+              id="year"
+              [(ngModel)]="year"
+              class="w-full p-3 pr-10 border rounded-md appearance-none border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+            >
+              <option *ngFor="let year of years" [value]="year.value">{{ year.label }}</option>
+            </select>
+            <!-- Custom Arrow Icon -->
+            <div class="absolute inset-y-0 flex items-center pointer-events-none right-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-neutral-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
         </div>
+
   
         <!-- Comments Textarea -->
         <div class="flex flex-col">
@@ -75,7 +92,7 @@
         <button
           type="button"
           (click)="imageUploader.click()"
-          class="self-start px-4 button-cta"
+          class="self-start px-4 py-2 button-cta"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
