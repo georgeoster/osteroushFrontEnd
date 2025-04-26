@@ -1,45 +1,162 @@
-<main class="glassCard flexColumn">
-    <header>Edit Place</header>
-    <section>
-        <mat-form-field class="fullWidth">
-            <mat-label>Name</mat-label>
-            <input matInput [(ngModel)]="name">
-        </mat-form-field>
+<div class="relative z-10 flex justify-center px-4">
+  <main class="w-full max-w-2xl p-8 mt-10 border shadow-lg rounded-2xl bg-white/20 backdrop-blur-md border-white/30">
     
-        <mat-form-field class="fullWidth">
-            <mat-label>Month</mat-label>
-            <mat-select panelClass="panel" [(value)]="month">
-                <mat-option [value]="month.value" *ngFor="let month of months">{{ month.label }}</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <!-- Header -->
+    <header class="pb-4 mb-6 text-2xl font-bold text-center border-b border-white/30 text-neutral-100">
+      Edit Place
+    </header>
 
-        <mat-form-field class="fullWidth" >
-            <mat-label>Year</mat-label>
-            <mat-select panelClass="panel" [(value)]="year">
-                <mat-option [value]="year.value" *ngFor="let year of years">{{ year.label }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-    
-        <mat-form-field class="fullWidth">
-            <mat-label>Comments</mat-label>
-            <textarea matInput [(ngModel)]="comments"></textarea>
-        </mat-form-field>
+    <!-- Form -->
+    <section class="flex flex-col space-y-6">
 
-        <app-image-viewer *ngFor="let preview of preExistingImages;let i = index" [preview]="preview" [i]="i" (removeImage)="removePreExistingImage(i)"></app-image-viewer>
+      <!-- Name Input -->
+      <div class="flex flex-col">
+        <label for="name" class="mb-2 font-semibold text-neutral-200">Name</label>
+        <input
+          id="name"
+          [(ngModel)]="name"
+          type="text"
+          class="w-full p-3 border rounded-md border-white/30 bg-white/10 text-neutral-100 placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+          placeholder="Name of the place"
+        />
+      </div>
 
-        <app-image-viewer *ngFor="let preview of imagePreviews;let i = index" [preview]="preview" [i]="i" (removeImage)="removeImage(i)"></app-image-viewer>
-    
-        <button mat-button class="glassCardButton" (click)="imageUploader.click()">
-            <mat-icon>photo_camera</mat-icon>
-            Add Image
+      <!-- Month Select -->
+      <div class="flex flex-col">
+        <label for="month" class="mb-2 font-semibold text-neutral-200">Month</label>
+        <div class="relative">
+          <select
+            id="month"
+            [(ngModel)]="month"
+            class="w-full p-3 pr-10 border rounded-md appearance-none border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+          >
+            <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
+          </select>
+          <!-- Arrow Icon -->
+          <div class="absolute inset-y-0 flex items-center pointer-events-none right-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-neutral-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Year Select -->
+      <div class="flex flex-col">
+        <label for="year" class="mb-2 font-semibold text-neutral-200">Year</label>
+        <div class="relative">
+          <select
+            id="year"
+            [(ngModel)]="year"
+            class="w-full p-3 pr-10 border rounded-md appearance-none border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+          >
+            <option *ngFor="let year of years" [value]="year.value">{{ year.label }}</option>
+          </select>
+          <!-- Arrow Icon -->
+          <div class="absolute inset-y-0 flex items-center pointer-events-none right-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-neutral-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Comments Textarea -->
+      <div class="flex flex-col">
+        <label for="comments" class="mb-2 font-semibold text-neutral-200">Comments</label>
+        <textarea
+          id="comments"
+          [(ngModel)]="comments"
+          rows="4"
+          class="w-full p-3 border rounded-md resize-none border-white/30 bg-white/10 text-neutral-100 placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+          placeholder="Write your experience..."
+        ></textarea>
+      </div>
+
+      <!-- Pre-existing Images -->
+      <div *ngFor="let preview of preExistingImages; let i = index" class="flex items-center gap-4 my-4">
+        <img [src]="preview" class="max-w-[60%] rounded-lg shadow-md" />
+        <button
+          type="button"
+          (click)="removePreExistingImage(i)"
+          class="flex items-center justify-center w-8 h-8 text-white transition-all bg-pink-900 rounded-full hover:bg-pink-950"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
-        <input type="file" multiple class="osteroush-hidden" #imageUploader (change)="imageUploadHandler($event)" accept="image/*">
+      </div>
+
+      <!-- New Uploaded Images -->
+      <div *ngFor="let preview of imagePreviews; let i = index" class="flex items-center gap-4 my-4">
+        <img [src]="preview" class="max-w-[60%] rounded-lg shadow-md" />
+        <button
+          type="button"
+          (click)="removeImage(i)"
+          class="flex items-center justify-center w-8 h-8 text-white transition-all bg-pink-900 rounded-full hover:bg-pink-950"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Upload Image Button -->
+      <button
+        type="button"
+        (click)="imageUploader.click()"
+        class="self-start px-4 py-2 button-cta"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4-4m0 0l-4 4m4-4v12" />
+        </svg>
+        Add Image
+      </button>
+
+      <!-- Hidden File Input -->
+      <input
+        type="file"
+        multiple
+        #imageUploader
+        class="hidden"
+        (change)="imageUploadHandler($event)"
+        accept="image/*"
+      />
 
     </section>
-    <footer>
-        <button mat-button class="glassCardButton" (click)="saveButtonHandler()">
-            <mat-spinner *ngIf="loading"></mat-spinner>
-            <span *ngIf="!loading">Save</span>
-        </button>
+
+    <!-- Footer -->
+    <footer class="flex justify-end pt-4 mt-8 border-t border-white/30">
+      <button
+        (click)="saveButtonHandler()"
+        class="button-cta"
+        [disabled]="loading"
+      >
+        <svg
+          *ngIf="loading"
+          class="w-5 h-5 text-white animate-spin"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+          ></path>
+        </svg>
+        <span *ngIf="!loading">Save</span>
+      </button>
     </footer>
-</main>
+
+  </main>
+</div>
