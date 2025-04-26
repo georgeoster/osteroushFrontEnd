@@ -1,11 +1,16 @@
 <div class="osteroush-container">
+
   <!-- <header> -->
-    <app-header></app-header>
-    <app-menu></app-menu>
+  <app-header></app-header>
+  <app-menu></app-menu>
   <!-- </header> -->
-  <div class="content">
-    <router-outlet></router-outlet>
+
+  <!-- <main> -->
+  <div class="content" [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
   </div>
+  <!-- </main> -->
+
 </div>
 
 

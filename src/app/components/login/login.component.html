@@ -1,5 +1,5 @@
 <div class="relative z-10 flex justify-center px-4">
-  <main class="w-full max-w-md p-8 mt-10 border shadow-lg rounded-2xl bg-white/20 backdrop-blur-md border-white/30">
+  <main class="w-full max-w-md p-8 mt-10 border shadow-lg rounded-2xl bg-white/20 backdrop-blur-md border-white/30 animate-fade">
     <section class="flex flex-col space-y-6">
       <!-- Username Field -->
       <div class="flex flex-col">
@@ -49,7 +49,7 @@
       <!-- Login Button -->
       <button
         (click)="login()"
-        class="self-end button-cta"
+        class="self-end button-cta active-press"
         [disabled]="loading"
       >
         <svg
