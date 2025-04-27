@@ -1,0 +1,22 @@
+<div
+  class="overflow-hidden transition-transform duration-200 border shadow-md cursor-pointer bg-white/20 backdrop-blur-md border-white/30 rounded-2xl hover:scale-105"
+  (click)="cardClicked()"
+>
+  <!-- Cover Image -->
+  <img
+    [src]="getCardPreview(place)"
+    alt="Cover Image"
+    class="object-cover w-full h-48"
+  />
+
+  <!-- Place Info -->
+  <div class="p-4 space-y-2">
+    <h3 class="text-lg font-semibold text-neutral-100">
+      {{ getMonthFor(place.MonthVisited) }} - {{ place.PlaceName }}
+    </h3>
+
+    <button class="px-4 py-2 text-sm button-cta">
+      View Details
+    </button>
+  </div>
+</div>

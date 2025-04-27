@@ -1,7 +1,8 @@
 export interface Place {
-    id: string,
-    name: string,
-    date: Date,
-    comments: string,
-    images: Array<string>
-}
+    PlaceName: string;
+    Comments: string;
+    Images: string[];
+    MonthVisited: string;
+    YearVisited?: string;
+  }
+      

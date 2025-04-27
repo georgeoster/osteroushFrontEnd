@@ -5,9 +5,9 @@ import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { PlacesService } from 'src/app/services/places.service';
 import { notify } from 'src/app/utils/notifyUtils';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EditService } from 'src/app/services/edit.service';
+import { Place } from '../../types';
 
 @Component({
   selector: 'app-view-places',
@@ -20,34 +20,25 @@ export class ViewPlacesComponent {
   loading:boolean = true;
   deleting:boolean = false;
   loggedIn:boolean = false;
+  isFadingOut = false;
   toDelete:any;
   places:{PlaceName:string, Comments:string, Images:[], MonthVisited:string}[] = [];
   placesServiceSubscription:Subscription = new Subscription;
   loadingSubscription:Subscription = new Subscription;
   loggedInSubscription:Subscription = new Subscription;
   deleteSuccessfulSubscription:Subscription = new Subscription;
-  monthsEnum=[
-    {label: 'Jan', value: '1'},
-    {label: 'Feb', value: '2'},
-    {label: 'Mar', value: '3'},
-    {label: 'Apr', value: '4'},
-    {label: 'May', value: '5'},
-    {label: 'Jun', value: '6'},
-    {label: 'Jul', value: '7'},
-    {label: 'Aug', value: '8'},
-    {label: 'Sep', value: '9'},
-    {label: 'Oct', value: '10'},
-    {label: 'Nov', value: '11'},
-    {label: 'Dec', value: '12'}
-  ];
+  viewMode: 'grid' | 'modal' = 'grid';
+  selectedPlace: any = null;
+  isModalClosing = false;
+  isFadingInGrid = false;
 
   constructor(
     private placesService:PlacesService, 
     private loginService: LoginService, 
     private toastService:ToastService, 
-    private dialog: MatDialog, 
     private router: Router,
-    private editService: EditService) {
+    private editService: EditService
+  ) {
     this.loading = true;
     this.getPlaces();
     this.subscribeToLoadingService();
@@ -65,7 +56,6 @@ export class ViewPlacesComponent {
       }
     });
   }
-  
   
   subscribeToLoadingService() {
     this.loadingSubscription = this.placesService.loading.subscribe((loading:any) => {
@@ -86,11 +76,52 @@ export class ViewPlacesComponent {
     this.deleteSuccessfulSubscription.unsubscribe();
   }
 
-  getMonthFor(value:string) {
-    return this.monthsEnum.find(m=>m.value===value)?.label;
+  openModal(place: Place) {
+    this.isFadingOut = true; // Start the fade-out animation
+  
+    // Wait for animation to finish (300ms matches your fadeOut animation timing)
+    setTimeout(() => {
+      this.selectedPlace = place;
+      this.viewMode = 'modal';
+      this.isFadingOut = false; // Reset it just in case
+    }, 300);
+  }
+  
+  closeModal() {
+    this.isModalClosing = true; // Shrink modal
+    
+    setTimeout(() => {
+      this.selectedPlace = null;
+      this.viewMode = 'grid';
+      this.isModalClosing = false;
+  
+      // START grid fade in
+      this.isFadingInGrid = true;
+  
+      // END grid fade in after a moment
+      setTimeout(() => {
+        this.isFadingInGrid = false;
+      }, 300);
+    }, 300);
   }
 
-  sortByMonth(){
+  handleModalAnimationDone() {
+    // Now safely hide the modal AFTER the shrink animation finished
+    this.selectedPlace = null;
+    this.viewMode = 'grid';
+    this.isModalClosing = false;
+  
+    // Start the grid fade-in animation
+    this.isFadingInGrid = true;
+  
+    // End grid fade-in after a moment
+    setTimeout(() => {
+      this.isFadingInGrid = false;
+    }, 300);
+  }
+  
+  
+  sortByMonth() {
     return this.places.sort((a,b) => {
       return a.MonthVisited.localeCompare(b.MonthVisited, undefined, {
         numeric: true,
@@ -99,7 +130,7 @@ export class ViewPlacesComponent {
     });
   }
 
-  async deletePlace(place:any) {
+  async deletePlace(place: Place) {
     this.deleting = true;
     this.toDelete = place;
     const placeToDelete:any = {
@@ -127,5 +158,4 @@ export class ViewPlacesComponent {
       }
     });
   }
-
 }
