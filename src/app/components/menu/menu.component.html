@@ -1,8 +1,25 @@
-<nav class="menu" [ngClass]="{menuGlassCard: showMenu}">
-    <ul>
-        <li *ngFor="let item of menuItems" (click)="item.handler()">
-            <mat-icon>{{item.icon}}</mat-icon>
-            <div>{{item.label}}</div> 
-        </li>
-    </ul>
+<nav class="menu" [ngClass]="{ 'menuOpen': showMenu }">
+  <!-- Close (X) button -->
+  <button
+    *ngIf="showMenu"
+    (click)="closeMenu()"
+    class="closeButton animate-fadeSlideIn"
+    aria-label="Close Menu"
+  >
+    <lucide-icon name="X" class="w-6 h-6"></lucide-icon>
+  </button>
+
+<!-- Navigation Menu -->
+  <ul 
+    *ngIf="showMenu"
+    class="animate-fadeSlideIn" 
+  >
+    <li
+      *ngFor="let item of menuItems"
+      (click)="item.handler()"
+    >
+      <lucide-icon [name]="item.icon" class="w-8 h-8 mr-4"></lucide-icon>
+      <span>{{ item.label }}</span>
+    </li>
+  </ul>
 </nav>

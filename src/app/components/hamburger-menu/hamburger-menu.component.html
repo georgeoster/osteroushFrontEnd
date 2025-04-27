@@ -1,3 +1,4 @@
-<div [ngClass]="{hamburger: menuOpen, hamburgerClosed: !menuOpen}" (click)="toggleMenu()">
-    <div></div>
+
+<div [ngClass]="{ 'hamburger': !menuOpen, 'hamburgerOpen': menuOpen }" (click)="toggleMenu()">
+  <div></div>
 </div>

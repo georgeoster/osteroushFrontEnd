@@ -1,29 +1,37 @@
-.hamburger, .hamburgerClosed {
-    width: 2em;    
+.hamburger,
+.hamburgerOpen {
+  @apply relative flex flex-col items-center justify-center w-8 h-8 cursor-pointer;
 }
 
-.hamburger:before,
-.hamburger:after,
 .hamburger div,
-.hamburgerClosed:before,
-.hamburgerClosed:after,
-.hamburgerClosed div {
-    background: var(--font-color);
-    content: "";
-    display: block;
-    height: 2px;
-    border-radius: 3px;
-    margin: 7px 0;
-    transition: .5s;
+.hamburger::before,
+.hamburger::after,
+.hamburgerOpen div,
+.hamburgerOpen::before,
+.hamburgerOpen::after {
+  @apply absolute left-0 w-full h-0.5 bg-neutral-100 rounded transition-all duration-300 ease-in-out;
+  content: "";
 }
 
-.hamburger:before {
-    transform: translateY(9px) rotate(135deg);
-}
-
-.hamburger:after {
-    transform: translateY(-9px) rotate(-135deg);
+.hamburger::before {
+  top: 0;
 }
 .hamburger div {
-    transform: scale(0);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.hamburger::after {
+  bottom: 0;
+}
+
+.hamburgerOpen::before {
+  transform: rotate(45deg);
+  top: 50%;
+}
+.hamburgerOpen div {
+  opacity: 0;
+}
+.hamburgerOpen::after {
+  transform: rotate(-45deg);
+  bottom: 50%;
 }
