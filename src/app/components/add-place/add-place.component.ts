@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastService } from 'src/app/services/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PlacesService } from 'src/app/services/places.service';
@@ -48,14 +48,14 @@ export class AddPlaceComponent {
   year:string='';
   placesServiceSubscription: Subscription = new Subscription;
 
-  constructor(private placesService:PlacesService, private router: Router, private snackBar:MatSnackBar){
+  constructor(private placesService:PlacesService, private router: Router, private toastService: ToastService){
     this.subscribeToPlacesService();
   }
 
   subscribeToPlacesService(){
     this.placesServiceSubscription = this.placesService.placeAdded.subscribe(added => {
       if(added) {
-        notify(this.snackBar, 'Successfully added '+this.name, 'successSnackBar');
+        notify(this.toastService, 'Successfully added '+this.name, 'success');
         this.router.navigate(['viewPlaces']);
       }
     });

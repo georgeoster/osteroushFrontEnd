@@ -47,6 +47,27 @@
   }
 }
 
+@layer utilities {
+  @keyframes toastIcon {
+    0% {
+      opacity: 0;
+      transform: scale(0.5) rotate(-20deg);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.1) rotate(5deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  .animate-toastIcon {
+    animation: toastIcon 0.6s ease-out forwards;
+  }
+}
+
+
 
 .flexColumn {
   display: flex;

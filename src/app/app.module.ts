@@ -28,8 +28,9 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
 import { ViewPlacesComponent } from './components/view-places/view-places.component';
 import { LoginComponent } from './components/login/login.component';
 import { EditPlaceComponent } from './components/edit-place/edit-place.component';
+import { ToastComponent } from './components/toast/toast.component';
 
-import { LucideAngularModule, House, Eye, Utensils, User, X } from 'lucide-angular';
+import { LucideAngularModule, House, Eye, Utensils, User, X, Check } from 'lucide-angular';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { LucideAngularModule, House, Eye, Utensils, User, X } from 'lucide-angul
     ImageViewerComponent,
     ViewPlacesComponent,
     LoginComponent,
-    EditPlaceComponent
+    EditPlaceComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,7 @@ import { LucideAngularModule, House, Eye, Utensils, User, X } from 'lucide-angul
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatDialogModule,
-    LucideAngularModule.pick({ House, Eye, Utensils, User, X })
+    LucideAngularModule.pick({ House, Eye, Utensils, User, X, Check })
   ],
   providers: [],
   bootstrap: [AppComponent]

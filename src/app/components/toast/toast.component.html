@@ -1,0 +1,29 @@
+
+<div
+  *ngIf="visible"
+  class="fixed z-50 flex items-center gap-3 px-6 py-3 transition-all duration-300 transform -translate-x-1/2 rounded-lg shadow-lg top-6 left-1/2 backdrop-blur-md"
+  [ngClass]="{
+    'bg-green-400/70 text-green-200': type === 'success',
+    'bg-red-400/70 text-red-200': type === 'error'
+  }"
+>
+  <!-- Icon -->
+  <div class="flex items-center justify-center w-6 h-6">
+    <lucide-icon
+      *ngIf="type === 'success'"
+      name="check"
+      class="w-6 h-6 animate-toastIcon"
+    ></lucide-icon>
+
+    <lucide-icon
+      *ngIf="type === 'error'"
+      name="x"
+      class="w-6 h-6 animate-toastIcon"
+    ></lucide-icon>
+  </div>
+
+  <!-- Message -->
+  <span class="text-lg font-medium">
+    {{ message }}
+  </span>
+</div>
