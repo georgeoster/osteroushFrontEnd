@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastService } from 'src/app/services/toast.service';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { PlacesService } from 'src/app/services/places.service';
@@ -44,7 +44,7 @@ export class ViewPlacesComponent {
   constructor(
     private placesService:PlacesService, 
     private loginService: LoginService, 
-    private snackBar:MatSnackBar, 
+    private toastService:ToastService, 
     private dialog: MatDialog, 
     private router: Router,
     private editService: EditService) {
@@ -58,10 +58,10 @@ export class ViewPlacesComponent {
   subscribeToDeleteSuccessful() {
     this.deleteSuccessfulSubscription = this.placesService.deleteSuccessful.subscribe((success:any) => {
       if(success) {
-        notify(this.snackBar, this.toDelete.PlaceName + ' has been deleted', 'successSnackBar');
+        notify(this.toastService, this.toDelete.PlaceName + ' has been deleted', 'success');
         this.places = this.places.filter((p:any) => p.PlaceName !== this.toDelete.PlaceName);
       } else {
-        notify(this.snackBar, 'error encountered while deleting ' + this.toDelete.PlaceName , 'errorSnackBar');
+        notify(this.toastService, 'error encountered while deleting ' + this.toDelete.PlaceName , 'error');
       }
     });
   }

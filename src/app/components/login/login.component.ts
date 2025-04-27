@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastService } from 'src/app/services/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
@@ -19,7 +19,7 @@ export class LoginComponent {
   obfuscatePassword:boolean=true;
   loginServiceSubscription: Subscription = new Subscription;
 
-  constructor(private loginService: LoginService, private router: Router, private snackBar:MatSnackBar){
+  constructor(private loginService: LoginService, private router: Router, private toastService:ToastService){
     this.subscribeToLoginService();
   }
 
@@ -27,12 +27,12 @@ export class LoginComponent {
     this.loginServiceSubscription = this.loginService.loggedIn.subscribe((loggedIn) => {
       this.loading = false;
       if (loggedIn) {
-        notify(this.snackBar, 'Successfully logged in', 'successSnackBar');
+        notify(this.toastService, 'Successfully logged in', 'success');
         this.router.navigate(['home']);
       }
       if (!loggedIn && this.attempted) {
         this.loading = false;
-        notify(this.snackBar, 'Username or password is incorrect', 'errorSnackBar');
+        notify(this.toastService, 'Username or password is incorrect', 'error');
       }
     });
   }
@@ -43,7 +43,7 @@ export class LoginComponent {
 
   login() {
     if (this.user?.length < 1 || this.pass?.length < 1) {
-      notify(this.snackBar, 'Username and password are required', 'errorSnackBar');
+      notify(this.toastService, 'Username and password are required', 'error');
       return;
     }
     this.loading = true;

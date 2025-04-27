@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastService } from 'src/app/services/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EditService } from 'src/app/services/edit.service';
@@ -52,7 +52,7 @@ export class EditPlaceComponent {
   editServiceSubscription:Subscription = new Subscription;
   patchServiceSubscription: Subscription = new Subscription;
 
-  constructor(private placesService:PlacesService, private router: Router, private snackBar:MatSnackBar, private editService: EditService){
+  constructor(private placesService:PlacesService, private router: Router, private toastService:ToastService, private editService: EditService){
     this.subscribeToEditService();
     this.subscribeToPlacesService();
     this.subscribeToPatchService();
@@ -61,10 +61,10 @@ export class EditPlaceComponent {
   subscribeToPatchService() {
     this.patchServiceSubscription = this.placesService.patchSuccessful.subscribe((success:any) => {
       if(success) {
-        notify(this.snackBar, this.name + ' has been updated', 'successSnackBar');
+        notify(this.toastService, this.name + ' has been updated', 'success');
         this.router.navigate(['viewPlaces']);
       } else {
-        notify(this.snackBar, 'error encountered while updating ' + this.name , 'errorSnackBar');
+        notify(this.toastService, 'error encountered while updating ' + this.name , 'error');
       }
     });
   }
@@ -94,7 +94,7 @@ export class EditPlaceComponent {
   subscribeToPlacesService(){
     this.placesServiceSubscription = this.placesService.placeAdded.subscribe(added => {
       if(added) {
-        notify(this.snackBar, 'Successfully added '+this.name, 'successSnackBar');
+        notify(this.toastService, 'Successfully added '+this.name, 'success');
         this.router.navigate(['viewPlaces']);
       }
     });
