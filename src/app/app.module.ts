@@ -29,6 +29,9 @@ import { ViewPlacesComponent } from './components/view-places/view-places.compon
 import { LoginComponent } from './components/login/login.component';
 import { EditPlaceComponent } from './components/edit-place/edit-place.component';
 
+import { LucideAngularModule, House, Eye, Utensils, User, X } from 'lucide-angular';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +62,8 @@ import { EditPlaceComponent } from './components/edit-place/edit-place.component
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    LucideAngularModule.pick({ House, Eye, Utensils, User, X })
   ],
   providers: [],
   bootstrap: [AppComponent]

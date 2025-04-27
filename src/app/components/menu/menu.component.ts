@@ -66,14 +66,14 @@ export class MenuComponent {
   subscribeToLogInService(){
     this.loginService.loggedIn.subscribe((loggedIn:boolean) => {
       this.menuItems = [
-        {icon: 'home', label: 'Home', handler: this.homeHandler.bind(this)},
-        {icon: 'visibility', label: 'View Places', handler: this.viewHandler.bind(this)}
+        {icon: 'House', label: 'Home', handler: this.homeHandler.bind(this)},
+        {icon: 'Eye', label: 'View Places', handler: this.viewHandler.bind(this)}
       ]
       if (loggedIn) {
-        this.menuItems.push({icon: 'restaurant', label: 'Add Place', handler: this.addHandler.bind(this)});
-        this.menuItems.push({icon: 'person', label: 'Sign Out', handler: this.signOutHandler.bind(this)});
+        this.menuItems.push({icon: 'Utensils', label: 'Add Place', handler: this.addHandler.bind(this)});
+        this.menuItems.push({icon: 'User', label: 'Sign Out', handler: this.signOutHandler.bind(this)});
       } else {
-        this.menuItems.push({icon: 'person', label: 'Sign In', handler: this.signInHandler.bind(this)});
+        this.menuItems.push({icon: 'User', label: 'Sign In', handler: this.signInHandler.bind(this)});
       }
     });
   }

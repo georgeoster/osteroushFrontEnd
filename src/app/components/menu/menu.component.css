@@ -1,52 +1,17 @@
+
 .menu {
-    position: fixed;
-    left: 0;
-    transform: translate3d(-200vw, 0, 0);
-    height: 100%;/*calc(100% - 4.9em);*/
-    width: min-content;
-    z-index: 50;
-    transition-duration: .5s;
-    transition-timing-function: ease;
+  @apply fixed top-0 left-0 z-40 flex flex-col w-full h-full transition-all duration-500 ease-in-out transform -translate-x-full opacity-0 bg-black/50 backdrop-blur-md;
 }
-
-.menuGlassCard {
-    color: red;
-    background-color: rgba(255, 255, 255, 0.25);
-    border: 1px solid rgb(201, 195, 231, .5);
-    backdrop-filter: blur(8px);
-    width: 100%;
-    padding: 1.5em;
-    box-sizing: border-box;
-    transform: translate3d(0vw, 0, 0);
+.menuOpen {
+  @apply translate-x-0 opacity-100;
 }
-
-mat-icon {
-    margin-right: .25em !important;
-}
-
 ul {
-    list-style-type: none;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 0;
-    color: var(--primary-purple);
+  @apply flex flex-col items-start gap-6 p-8 mx-auto mt-20;
+}
+li {
+  @apply flex items-center text-4xl transition-all duration-200 ease-in-out cursor-pointer text-neutral-100 hover:text-pink-600 hover:scale-105;
 }
 
-li {
-    font-size: 2em;
-    text-decoration: none;
-    border-bottom: 1px solid rgb(201, 195, 231, .5);
-    height: min-content;
-    min-width: min-content;
-    box-sizing: border-box;
-    padding: 1em 0;
-    cursor: pointer;
-    width: 100%;
-    word-break: normal;
-    white-space: nowrap;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.closeButton {
+  @apply absolute flex items-center justify-center w-10 h-10 text-white transition-all duration-200 ease-in-out rounded-full top-4 right-4 hover:bg-white/10 hover:text-pink-600 hover:scale-110;
 }
