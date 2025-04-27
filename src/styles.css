@@ -67,6 +67,45 @@
   }
 }
 
+@layer utilities {
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+      transform-origin: center center; /* <-- added */
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.25);
+      transform-origin: center center; /* <-- added */
+    }
+  }
+
+  .animate-fadeOut {
+    animation: fadeOut 300ms ease-in forwards;
+  }
+}
+
+@layer utilities {
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.25);
+      transform-origin: center center; /* <-- added */
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      transform-origin: center center; /* <-- added */
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 300ms ease-out forwards;
+  }
+}
+
+
 
 
 .flexColumn {

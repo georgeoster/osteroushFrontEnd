@@ -1,37 +1,52 @@
-<mat-progress-spinner
-    *ngIf="loading"
-    [color]="spinnerColor"
-    [mode]="spinnerMode"
-    diameter="125"
-    strokeWidth="10"
-/>
+<!-- Loading Spinner -->
+<div *ngIf="loading" class="flex items-center justify-center w-full h-[calc(100vh-10rem)]">
+  <div class="w-16 h-16 border-4 border-pink-500 rounded-full border-t-transparent animate-spin"></div>
+</div>
 
-<main class="glassCard" *ngIf="!loading && places.length < 1">
-    <section>
-        <h2>Oops!</h2>
-        <p>Looks like we didn't (or haven't yet) gone anywhere this year.<br><br>
-            Well, that or we are just being slow to update. Sometimes life gets busy, ya know?</p>
+<!-- No Places Found -->
+<div *ngIf="!loading && places.length === 0 && viewMode === 'grid'" class="relative z-10 flex justify-center px-4">
+  <main class="w-full max-w-2xl p-8 mt-10 border shadow-lg rounded-2xl bg-white/20 backdrop-blur-md border-white/30 animate-fade">
+    <section class="space-y-4 text-left">
+      <h2 class="mb-8 text-3xl font-bold text-neutral-100">
+        Coming Soon ...
+      </h2>
+      <p class="text-base md:text-lg text-neutral-200">
+        Oops! Looks like we haven't added any places for this year yet.
+      </p>
+      <p class="text-base md:text-lg text-neutral-200">
+        Check back later — sometimes life gets busy!
+      </p>
     </section>
-</main>
+  </main>
+</div>
 
-<mat-accordion *ngIf="!loading" multi>
-    <mat-expansion-panel *ngFor="let place of places" class="glassCard">
-        <mat-expansion-panel-header>
-            <mat-panel-title>{{getMonthFor(place.MonthVisited)}} - {{place?.PlaceName}}</mat-panel-title>
-        </mat-expansion-panel-header>
-        <p class="comments">
-            {{place?.Comments}}
-        </p>
-        <img *ngFor="let url of place.Images" src="https://osteroushimages.s3.us-east-2.amazonaws.com/{{url}}">
-        <footer>
-            <!-- -->
-            <button *ngIf="loggedIn && !deleting" mat-button class="glassCardButton editButton" (click)="editPlace(place)">
-                Edit
-            </button>
-            <button *ngIf="loggedIn" mat-button class="glassCardButton" (click)="deletePlace(place)">
-                <mat-spinner *ngIf="deleting"></mat-spinner>
-                <span *ngIf="!deleting">Delete</span>
-            </button>
-        </footer>
-    </mat-expansion-panel>
-</mat-accordion>
+<!-- Places Grid -->
+<div
+  *ngIf="!loading && places.length > 0 && viewMode === 'grid'"
+  [ngClass]="{
+    'relative z-10 flex justify-center px-12': true,
+    'animate-fadeOut': isFadingOut,
+    'animate-fadeIn': isFadingInGrid
+  }"
+>
+  <main class="grid grid-cols-1 gap-12 mt-10 md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
+    <app-place-card
+      *ngFor="let place of places"
+      [place]="place"
+      (clicked)="openModal(place)"
+    ></app-place-card>
+  </main>
+</div>
+
+<app-place-modal
+  [place]="selectedPlace"
+  [loggedIn]="loggedIn"
+  [ngClass]="{
+    'opacity-0 scale-95 animate-fadeOut': isModalClosing,
+    'opacity-100 scale-100 animate-fadeIn': viewMode === 'modal' && !isModalClosing
+  }"
+  (closeModal)="closeModal()"
+  (animationDone)="handleModalAnimationDone()"
+  (editPlace)="editPlace($event)"
+  (deletePlace)="deletePlace($event)"
+></app-place-modal>

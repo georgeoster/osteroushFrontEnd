@@ -1,0 +1,66 @@
+<!-- Outer backdrop -->
+<div *ngIf="place" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/20 backdrop-blur-md">
+  
+  <!-- Modal Card -->
+  <div
+    class="relative w-full max-w-2xl p-6 overflow-hidden transition-all duration-300 border shadow-lg bg-white/30 border-white/30 rounded-2xl backdrop-blur-md"
+    [ngClass]="{
+      'opacity-0 pointer-events-none scale-95 animate-fadeOut': isClosing,
+      'opacity-100 scale-100 animate-fadeIn': isOpen
+    }"
+  >
+
+    <!-- Close Button -->
+    <button
+      (click)="close()"
+      class="absolute flex items-center justify-center w-10 h-10 transition-all duration-200 ease-in-out rounded-full top-4 right-4 text-neutral-100 hover:bg-white/10 hover:text-pink-600 hover:scale-110"
+      aria-label="Close Modal"
+    >
+      <lucide-icon name="X" class="w-6 h-6"></lucide-icon>
+    </button>
+
+    <!-- Modal Body -->
+    <div class="flex flex-col space-y-6">
+      <!-- Title -->
+      <h2 class="text-2xl font-bold text-left text-neutral-100">
+        {{ getMonthFor(place.MonthVisited) }} {{ place.YearVisited || '' }} - {{ place.PlaceName }}
+      </h2>
+
+      <!-- Main Image -->
+      <img
+        *ngIf="place.Images.length > 0"
+        [src]="getCardPreview(place)"
+        alt="Place Image"
+        class="object-cover w-full rounded-lg shadow-md max-h-80"
+      />
+      <img
+        *ngIf="!place?.Images?.length"
+        src="../../assets/placePlaceHolder.jpg"
+        alt="Placeholder Image"
+        class="object-cover w-full rounded-lg shadow-md max-h-80"
+      />
+
+      <!-- Comments -->
+      <p class="text-base text-left text-neutral-200">
+        {{ place.Comments }}
+      </p>
+
+      <!-- Carousel Placeholder -->
+      <div class="flex items-center justify-center w-full h-40 mt-6 border-2 border-dashed rounded-lg text-neutral-300 border-white/30">
+        (Carousel will go here)
+      </div>
+
+      <!-- Action Buttons (Edit/Delete) -->
+      <div *ngIf="loggedIn" class="flex justify-end gap-4 mt-6">
+        <button (click)="edit()" class="px-4 py-2 text-sm button-cta">
+          Edit
+        </button>
+        <button (click)="delete()" class="px-4 py-2 text-sm button-cta">
+          Delete
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

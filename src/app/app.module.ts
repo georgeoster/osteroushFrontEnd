@@ -29,6 +29,8 @@ import { ViewPlacesComponent } from './components/view-places/view-places.compon
 import { LoginComponent } from './components/login/login.component';
 import { EditPlaceComponent } from './components/edit-place/edit-place.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { PlaceModalComponent } from './components/place-modal/place-modal.component';
+import { PlaceCardComponent } from './components/place-card/place-card.component';
 
 import { LucideAngularModule, House, Eye, Utensils, User, X, Check } from 'lucide-angular';
 
@@ -45,7 +47,9 @@ import { LucideAngularModule, House, Eye, Utensils, User, X, Check } from 'lucid
     ViewPlacesComponent,
     LoginComponent,
     EditPlaceComponent,
-    ToastComponent
+    ToastComponent,
+    PlaceModalComponent,
+    PlaceCardComponent
   ],
   imports: [
     BrowserModule,
