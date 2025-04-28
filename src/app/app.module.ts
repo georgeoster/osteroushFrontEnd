@@ -31,8 +31,10 @@ import { EditPlaceComponent } from './components/edit-place/edit-place.component
 import { ToastComponent } from './components/toast/toast.component';
 import { PlaceModalComponent } from './components/place-modal/place-modal.component';
 import { PlaceCardComponent } from './components/place-card/place-card.component';
+import { PlaceCarouselComponent } from './components/place-carousel/place-carousel.component';
+import { ImageLightboxComponent } from './components/image-lightbox/image-lightbox.component';
 
-import { LucideAngularModule, House, Eye, Utensils, User, X, Check } from 'lucide-angular';
+import { LucideAngularModule, House, Eye, Utensils, User, X, Check, ChevronRight, ChevronLeft } from 'lucide-angular';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { LucideAngularModule, House, Eye, Utensils, User, X, Check } from 'lucid
     EditPlaceComponent,
     ToastComponent,
     PlaceModalComponent,
-    PlaceCardComponent
+    PlaceCardComponent,
+    PlaceCarouselComponent,
+    ImageLightboxComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,7 @@ import { LucideAngularModule, House, Eye, Utensils, User, X, Check } from 'lucid
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatDialogModule,
-    LucideAngularModule.pick({ House, Eye, Utensils, User, X, Check })
+    LucideAngularModule.pick({ House, Eye, Utensils, User, X, Check, ChevronRight, ChevronLeft })
   ],
   providers: [],
   bootstrap: [AppComponent]
