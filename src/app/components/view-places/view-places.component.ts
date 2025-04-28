@@ -31,6 +31,8 @@ export class ViewPlacesComponent {
   selectedPlace: any = null;
   isModalClosing = false;
   isFadingInGrid = false;
+  showConfirmDialog = false;
+
 
   constructor(
     private placesService:PlacesService, 
@@ -131,17 +133,34 @@ export class ViewPlacesComponent {
   }
 
   async deletePlace(place: Place) {
-    this.deleting = true;
     this.toDelete = place;
-    const placeToDelete:any = {
-      PlaceName: place.PlaceName
-    }
-    if(place.Images?.length > 0) {
-      placeToDelete.Images = JSON.stringify(place.Images)
-    }
-    this.placesService.deletePlace(placeToDelete);
-    this.deleting = false;
+    this.showConfirmDialog = true;
   }
+
+  confirmDelete() {
+    this.showConfirmDialog = false;
+    this.deleting = true;
+
+    this.selectedPlace = null;
+    this.viewMode = 'grid';
+  
+    const placeToDelete: any = {
+      PlaceName: this.toDelete.PlaceName
+    };
+  
+    if (this.toDelete.Images?.length > 0) {
+      placeToDelete.Images = JSON.stringify(this.toDelete.Images);
+    }
+  
+    this.placesService.deletePlace(placeToDelete);
+  }
+  
+  cancelDelete() {
+    this.showConfirmDialog = false;
+    this.toDelete = null;
+  }
+  
+  
 
   editPlace(place:any) {
     this.editService.setToEdit(place);

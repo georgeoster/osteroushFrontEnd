@@ -105,6 +105,27 @@
   }
 }
 
+@keyframes wiggle {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-5px); }
+  30% { transform: translateX(5px); }
+  45% { transform: translateX(-5px); }
+  60% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+.wiggle {
+  animation: wiggle 400ms ease;
+}
+
+
+input:-webkit-autofill {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.05) inset !important;
+  -webkit-text-fill-color: #f1f5f9 !important; /* Same as text-neutral-100 */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 
 
 

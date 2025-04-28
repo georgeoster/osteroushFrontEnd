@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+// import { Component } from '@angular/core';
 import { ToastService } from 'src/app/services/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PlacesService } from 'src/app/services/places.service';
 import { notify } from 'src/app/utils/notifyUtils';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-add-place',
@@ -11,6 +12,10 @@ import { notify } from 'src/app/utils/notifyUtils';
   styleUrls: ['./add-place.component.css']
 })
 export class AddPlaceComponent {
+  @ViewChild('nameInput') nameInput!: ElementRef;
+  @ViewChild('monthSelect') monthSelect!: ElementRef;
+  @ViewChild('yearSelect') yearSelect!: ElementRef;
+
   loading:boolean = false;
 
   imagePreviews: string[] = [];
@@ -95,6 +100,27 @@ export class AddPlaceComponent {
   }
 
   saveButtonHandler() {
+    if (!this.name.trim()) {
+      notify(this.toastService, 'Please enter a Name.', 'error');
+      this.nameInput.nativeElement.focus();
+      this.triggerWiggle(this.nameInput);
+      return;
+    }
+    
+    if (!this.month) {
+      notify(this.toastService, 'Please select a Month.', 'error');
+      this.monthSelect.nativeElement.focus();
+      this.triggerWiggle(this.monthSelect);
+      return;
+    }
+    
+    if (!this.year) {
+      notify(this.toastService, 'Please select a Year.', 'error');
+      this.yearSelect.nativeElement.focus();
+      this.triggerWiggle(this.yearSelect);
+      return;
+    }
+  
     this.loading = true;
     const placeToUpload = new FormData();
     placeToUpload.append('name', this.name);
@@ -102,10 +128,17 @@ export class AddPlaceComponent {
     placeToUpload.append('year', this.year.toString());
     placeToUpload.append('comments', this.comments);
     this.imagesToUpload.forEach((image, i) => {
-      placeToUpload.append('image'+i, image);
+      placeToUpload.append('image' + i, image);
     });
     placeToUpload.append('lastImageIndex', this.imagesToUpload.length.toString());
     this.placesService.addPlace(placeToUpload);
   }
 
+  triggerWiggle(element: ElementRef) {
+    const el = element.nativeElement;
+    el.classList.remove('wiggle'); // Reset if already animating
+    void el.offsetWidth; // Force reflow 
+    el.classList.add('wiggle');
+  }
+  
 }

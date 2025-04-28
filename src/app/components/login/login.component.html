@@ -21,6 +21,7 @@
             id="password"
             [(ngModel)]="pass"
             [type]="obfuscatePassword ? 'password' : 'text'"
+            (keydown.enter)="login()"
             class="w-full p-3 border rounded-md border-white/30 bg-white/10 pr-14 text-neutral-100 placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
             placeholder="Enter your password"
           />
