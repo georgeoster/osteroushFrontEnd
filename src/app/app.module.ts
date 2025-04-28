@@ -33,6 +33,7 @@ import { PlaceModalComponent } from './components/place-modal/place-modal.compon
 import { PlaceCardComponent } from './components/place-card/place-card.component';
 import { PlaceCarouselComponent } from './components/place-carousel/place-carousel.component';
 import { ImageLightboxComponent } from './components/image-lightbox/image-lightbox.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 import { LucideAngularModule, House, Eye, Utensils, User, X, Check, ChevronRight, ChevronLeft } from 'lucide-angular';
 
@@ -53,7 +54,8 @@ import { LucideAngularModule, House, Eye, Utensils, User, X, Check, ChevronRight
     PlaceModalComponent,
     PlaceCardComponent,
     PlaceCarouselComponent,
-    ImageLightboxComponent
+    ImageLightboxComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

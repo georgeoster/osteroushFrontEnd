@@ -47,6 +47,10 @@ export class PlaceModalComponent {
     return '../../assets/placePlaceHolder.jpg';
   }
 
+  getFormattedComments(): string {
+    return this.place.Comments.replace(/\n/g, '<br>');
+  }
+
   edit() {
     this.editPlace.emit(this.place);
   }

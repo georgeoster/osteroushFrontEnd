@@ -50,3 +50,11 @@
   (editPlace)="editPlace($event)"
   (deletePlace)="deletePlace($event)"
 ></app-place-modal>
+
+<app-confirm-dialog
+  *ngIf="showConfirmDialog"
+  message="Are you sure you want to delete this place?"
+  (confirm)="confirmDelete()"
+  (cancel)="cancelDelete()"
+></app-confirm-dialog>
+

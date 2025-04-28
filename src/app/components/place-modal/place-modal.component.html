@@ -43,9 +43,7 @@
       </ng-template>
 
       <!-- Comments -->
-      <p class="text-base text-left text-neutral-200">
-        {{ place.Comments }}
-      </p>
+      <p class="text-base text-left text-neutral-200" [innerHTML]="getFormattedComments()"></p>
 
       <!-- Action Buttons (Edit/Delete) -->
       <div *ngIf="loggedIn" class="flex justify-end gap-4 mt-6">
