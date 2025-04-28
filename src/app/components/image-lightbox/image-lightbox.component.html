@@ -1,0 +1,14 @@
+<div *ngIf="imageUrl" class="fixed inset-0 z-[1000] flex items-center justify-center bg-black/80 p-4">
+  <img
+    [src]="imageUrl"
+    alt="Expanded Image"
+    class="max-w-full max-h-full rounded-lg shadow-lg"
+  />
+  <button
+    (click)="close()"
+    class="absolute p-2 rounded-full top-4 right-4 bg-white/30 hover:bg-white/40 backdrop-blur-md"
+    aria-label="Close"
+  >
+    <lucide-icon name="X" class="w-6 h-6 text-neutral-800"></lucide-icon>
+  </button>
+</div>

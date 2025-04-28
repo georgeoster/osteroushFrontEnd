@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MONTHS } from '../../utils/constants';
 import { Place } from '../../types';
+import { LightboxService } from '../../services/lightbox.service';
 
 @Component({
   selector: 'app-place-modal',
@@ -14,11 +15,17 @@ export class PlaceModalComponent {
   @Output() animationDone = new EventEmitter<void>();
   @Output() editPlace = new EventEmitter<Place>();
   @Output() deletePlace = new EventEmitter<Place>();
-
+  
   isClosing = false;
+  
+  constructor(private lightboxService: LightboxService) {}
 
   get isOpen() {
     return !!this.place && !this.isClosing;
+  }
+
+  expandImage(url: string) {
+    this.lightboxService.open(url);
   }
 
   close() {
