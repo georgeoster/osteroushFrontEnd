@@ -17,7 +17,7 @@
             id="name"
             [(ngModel)]="name"
             type="text"
-            class="w-full p-3 border rounded-md border-white/30 bg-white/10 text-neutral-100 placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+            class="w-full p-3 border rounded-md border-white/30 bg-white/10 text-neutral-100 placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-pink-500"
             placeholder="Name of the place"
           />
         </div>
@@ -30,7 +30,7 @@
               #monthSelect
               id="month"
               [(ngModel)]="month"
-              class="w-full p-3 pr-10 border rounded-md appearance-none border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+              class="w-full p-3 pr-10 border rounded-md appearance-none border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
               <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
             </select>
@@ -51,7 +51,7 @@
               #yearSelect
               id="year"
               [(ngModel)]="year"
-              class="w-full p-3 pr-10 border rounded-md appearance-none border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+              class="w-full p-3 pr-10 border rounded-md appearance-none border-white/30 bg-white/10 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
               <option *ngFor="let year of years" [value]="year.value">{{ year.label }}</option>
             </select>
@@ -72,7 +72,7 @@
             id="comments"
             [(ngModel)]="comments"
             rows="4"
-            class="w-full p-3 border rounded-md resize-none border-white/30 bg-white/10 text-neutral-100 placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-md"
+            class="w-full p-3 border rounded-md resize-none border-white/30 bg-white/10 text-neutral-100 placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-pink-500"
             placeholder="Write your experience..."
           ></textarea>
         </div>
