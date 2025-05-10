@@ -1,7 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { ToastService } from './services/toast.service';
-import { ToastComponent } from './components/toast/toast.component';
 
 @Component({
   selector: 'app-root',
@@ -22,13 +20,4 @@ export class AppComponent {
   prepareRoute(outlet: any) {
     return outlet.activatedRouteData?.['animation'];
   }
-
-  constructor(private toastService: ToastService) {}
-
-  @ViewChild(ToastComponent) toastComponent!: ToastComponent;
-
-  ngAfterViewInit() {
-    this.toastService.register(this.toastComponent);
-  }
-
 }

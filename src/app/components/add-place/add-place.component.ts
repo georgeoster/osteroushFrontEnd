@@ -1,9 +1,8 @@
 // import { Component } from '@angular/core';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/services/ui/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PlacesService } from 'src/app/services/places.service';
-import { notify } from 'src/app/utils/notifyUtils';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -60,7 +59,7 @@ export class AddPlaceComponent {
   subscribeToPlacesService(){
     this.placesServiceSubscription = this.placesService.placeAdded.subscribe(added => {
       if(added) {
-        notify(this.toastService, 'Successfully added '+this.name, 'success');
+        this.toastService.show('Successfully added '+this.name, 'success');
         this.router.navigate(['viewPlaces']);
       }
     });
@@ -101,21 +100,21 @@ export class AddPlaceComponent {
 
   saveButtonHandler() {
     if (!this.name.trim()) {
-      notify(this.toastService, 'Please enter a Name.', 'error');
+      this.toastService.show('Please enter a Name.', 'error');
       this.nameInput.nativeElement.focus();
       this.triggerWiggle(this.nameInput);
       return;
     }
     
     if (!this.month) {
-      notify(this.toastService, 'Please select a Month.', 'error');
+      this.toastService.show('Please select a Month.', 'error');
       this.monthSelect.nativeElement.focus();
       this.triggerWiggle(this.monthSelect);
       return;
     }
     
     if (!this.year) {
-      notify(this.toastService, 'Please select a Year.', 'error');
+      this.toastService.show('Please select a Year.', 'error');
       this.yearSelect.nativeElement.focus();
       this.triggerWiggle(this.yearSelect);
       return;

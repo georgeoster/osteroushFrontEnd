@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/services/ui/toast.service';
 import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services/domain/login.service';
 import { PlacesService } from 'src/app/services/places.service';
-import { notify } from 'src/app/utils/notifyUtils';
 import { Router } from '@angular/router';
 import { EditService } from 'src/app/services/edit.service';
 import { Place } from '../../types';
@@ -51,10 +50,10 @@ export class ViewPlacesComponent {
   subscribeToDeleteSuccessful() {
     this.deleteSuccessfulSubscription = this.placesService.deleteSuccessful.subscribe((success:any) => {
       if(success) {
-        notify(this.toastService, this.toDelete.PlaceName + ' has been deleted', 'success');
+        this.toastService.show(this.toDelete.PlaceName + ' has been deleted', 'success');
         this.places = this.places.filter((p:any) => p.PlaceName !== this.toDelete.PlaceName);
       } else {
-        notify(this.toastService, 'error encountered while deleting ' + this.toDelete.PlaceName , 'error');
+        this.toastService.show('error encountered while deleting ' + this.toDelete.PlaceName , 'error');
       }
     });
   }

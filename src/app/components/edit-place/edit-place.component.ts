@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/services/ui/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EditService } from 'src/app/services/edit.service';
 import { PlacesService } from 'src/app/services/places.service';
-import { notify } from 'src/app/utils/notifyUtils';
 
 @Component({
   selector: 'app-edit-place',
@@ -61,10 +60,10 @@ export class EditPlaceComponent {
   subscribeToPatchService() {
     this.patchServiceSubscription = this.placesService.patchSuccessful.subscribe((success:any) => {
       if(success) {
-        notify(this.toastService, this.name + ' has been updated', 'success');
+        this.toastService.show(this.name + ' has been updated', 'success');
         this.router.navigate(['viewPlaces']);
       } else {
-        notify(this.toastService, 'error encountered while updating ' + this.name , 'error');
+        this.toastService.show('error encountered while updating ' + this.name , 'error');
       }
     });
   }
@@ -94,7 +93,7 @@ export class EditPlaceComponent {
   subscribeToPlacesService(){
     this.placesServiceSubscription = this.placesService.placeAdded.subscribe(added => {
       if(added) {
-        notify(this.toastService, 'Successfully added '+this.name, 'success');
+        this.toastService.show('Successfully added '+this.name, 'success');
         this.router.navigate(['viewPlaces']);
       }
     });
