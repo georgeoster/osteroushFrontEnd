@@ -35,7 +35,7 @@ export class PlaceCarouselComponent {
   @Input() images: string[] = [];
   @Output() imageClicked = new EventEmitter<string>();
 
-  currentImageIndex = 1;
+  currentImageIndex = 0;
   animationDirection: 'left' | 'right' | 'leftAlt' | 'rightAlt' = 'left';
   animationKey = 0; // Counter to force change
 

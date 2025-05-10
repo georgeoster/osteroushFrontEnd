@@ -28,7 +28,7 @@
       </h2>
 
       <!-- Main Image or Carousel -->
-      <ng-container *ngIf="place.Images.length > 0; else placeholderImage">
+      <ng-container *ngIf="place.Images.length !== 0; else placeholderImage">
         <app-place-carousel
           [images]="place.Images"
           (imageClicked)="expandImage($event)"
