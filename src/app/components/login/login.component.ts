@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { ToastService } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/services/ui/toast.service';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/domain/login.service';
 import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/services/login.service';
-import { notify } from 'src/app/utils/notifyUtils';
 
 @Component({
   selector: 'app-login',
@@ -11,44 +10,46 @@ import { notify } from 'src/app/utils/notifyUtils';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  user: string = '';
+  pass: string = '';
+  loading: boolean = false;
+  obfuscatePassword: boolean = true;
+  loginSubscription: Subscription = new Subscription();
 
-  user:string='';
-  pass:string='';
-  loading:boolean=false;
-  attempted:boolean=false;
-  obfuscatePassword:boolean=true;
-  loginServiceSubscription: Subscription = new Subscription;
-
-  constructor(private loginService: LoginService, private router: Router, private toastService:ToastService){
-    this.subscribeToLoginService();
-  }
-
-  subscribeToLoginService(){
-    this.loginServiceSubscription = this.loginService.loggedIn.subscribe((loggedIn) => {
-      this.loading = false;
-      if (loggedIn) {
-        notify(this.toastService, 'Successfully logged in', 'success');
-        this.router.navigate(['home']);
-      }
-      if (!loggedIn && this.attempted) {
-        this.loading = false;
-        notify(this.toastService, 'Username or password is incorrect', 'error');
-      }
-    });
-  }
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private toastService: ToastService
+  ) {}
 
   ngOnDestroy() {
-    this.loginServiceSubscription.unsubscribe();
+    this.loginSubscription.unsubscribe();
   }
 
   login() {
-    if (this.user?.length < 1 || this.pass?.length < 1) {
-      notify(this.toastService, 'Username and password are required', 'error');
+    if (!this.user.trim() || !this.pass.trim()) {
+      this.toastService.show('Username and password are required', 'error');
       return;
     }
+  
     this.loading = true;
-    this.attempted = true;
-    this.loginService.login(this.user, this.pass);
+  
+    this.loginSubscription = this.loginService.login(this.user, this.pass).subscribe({
+      next: (response) => {
+        this.loading = false;
+        if (response.login) {
+          this.toastService.show('Successfully logged in', 'success');
+          this.router.navigate(['home']);
+        } else {
+          this.toastService.show('Username or password is incorrect', 'error');
+        }
+      },
+      error: (error) => {
+        this.loading = false;
+        const message = error?.error?.message || 'An unexpected error occurred';
+        this.toastService.show(message, 'error');
+      }
+    });
   }
-
+  
 }

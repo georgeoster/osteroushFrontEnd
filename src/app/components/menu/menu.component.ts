@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services/domain/login.service';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
@@ -64,7 +64,7 @@ export class MenuComponent {
 
 
   subscribeToLogInService(){
-    this.loginService.loggedIn.subscribe((loggedIn:boolean) => {
+    this.loginServiceSubscription = this.loginService.loggedIn.subscribe((loggedIn:boolean) => {
       this.menuItems = [
         {icon: 'House', label: 'Home', handler: this.homeHandler.bind(this)},
         {icon: 'Eye', label: 'View Places', handler: this.viewHandler.bind(this)}
