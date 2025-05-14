@@ -4,7 +4,8 @@
   <!-- Modal Card -->
   <div
     class="relative w-full max-w-2xl p-6 border shadow-lg bg-white/30 border-white/30 rounded-2xl backdrop-blur-md"
-    style="max-height: calc(100vh - 2rem);"
+    style="max-height: calc(var(--vh, 1vh) * 100 - 2rem);"
+
     [ngClass]="{
       'opacity-0 pointer-events-none scale-95 animate-fadeOut': isClosing,
       'opacity-100 scale-100 animate-fadeIn': isOpen
@@ -29,7 +30,7 @@
     </div>
 
     <!-- Scrollable Content -->
-    <div class="pr-2 space-y-6 overflow-y-auto" style="max-height: calc(100vh - 12rem);">
+    <div class="pr-2 space-y-6 overflow-y-auto" style="max-height: calc(var(--vh, 1vh) * 100 - 12rem);">
 
       <!-- Main Image or Carousel -->
       <ng-container *ngIf="place.Images.length !== 0; else placeholderImage">

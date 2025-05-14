@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ViewportService } from './services/ui/viewport.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class AppComponent {
   title = 'osteroush';
+
+  constructor(private viewportService: ViewportService) {}
 
   prepareRoute(outlet: any) {
     return outlet.activatedRouteData?.['animation'];
