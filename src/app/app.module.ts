@@ -10,19 +10,6 @@ import { HamburgerMenuComponent } from './components/hamburger-menu/hamburger-me
 import { MenuComponent } from './components/menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatIconModule} from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
-
 import { HomeComponent } from './components/home/home.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
 import { ViewPlacesComponent } from './components/view-places/view-places.component';
@@ -63,18 +50,6 @@ import { LucideAngularModule, House, Eye, Utensils, User, X, Check, ChevronRight
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatTableModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatExpansionModule,
-    MatProgressSpinnerModule,
-    MatSnackBarModule,
-    MatDialogModule,
     LucideAngularModule.pick({ House, Eye, Utensils, User, X, Check, ChevronRight, ChevronLeft })
   ],
   providers: [],

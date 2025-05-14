@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ToastService } from 'src/app/services/ui/toast.service';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/services/domain/login.service';
@@ -15,7 +14,6 @@ import { Place } from '../../types';
 })
 export class ViewPlacesComponent {
   spinnerColor:string = '#e8eaf5';
-  spinnerMode:ProgressSpinnerMode = 'indeterminate';
   loading:boolean = true;
   deleting:boolean = false;
   loggedIn:boolean = false;
