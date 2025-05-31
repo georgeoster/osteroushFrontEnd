@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ViewportService } from './services/ui/viewport.service';
+import { Router, NavigationEnd } from '@angular/router';
+
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -18,7 +21,15 @@ import { ViewportService } from './services/ui/viewport.service';
 export class AppComponent {
   title = 'osteroush';
 
-  constructor(private viewportService: ViewportService) {}
+  constructor(private viewportService: ViewportService, private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        gtag('config', 'G-XXXXXXX', {
+          page_path: event.urlAfterRedirects,
+        });
+      }
+    });
+  }
 
   prepareRoute(outlet: any) {
     return outlet.activatedRouteData?.['animation'];
